@@ -20,6 +20,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
+import {MatTableModule} from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { EmployeeListComponent } from './components/employee-list/employee-list.
     MatDividerModule,
     MatButtonModule,
     ReactiveFormsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder,Validators   } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Employee } from 'src/app/models/employee.model';
 import { EmployeeService } from 'src/app/services/employee.service';
 
@@ -15,7 +16,8 @@ export class EmployeeComponent implements OnInit{
 
   constructor(
     private formBuilder: FormBuilder,
-    private employeeService:EmployeeService
+    private employeeService:EmployeeService,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +31,8 @@ export class EmployeeComponent implements OnInit{
         next:(res: Employee)=>{
           console.log(res);
           this.clearForm();
+          this.route.navigate(['/']);
+
         },
         error: (err: HttpErrorResponse) => {
           console.log(err);

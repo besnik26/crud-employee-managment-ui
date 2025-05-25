@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Router, Routes } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Employee } from 'src/app/models/employee.model';
@@ -13,7 +13,10 @@ export class EmployeeListComponent implements OnInit{
   dataSource: Employee[] = [];
   displayedColumns: string[] = ['employeeId', 'employeeName', 'employeeContactNumber', 'employeeAddress', 'employeeGender','employeeDepartment','employeeSkills','edit','delete'];
 
-  constructor(private employeeService:EmployeeService){
+  constructor(
+    private employeeService:EmployeeService, 
+    private router:Router
+  ){
     this.getEmployeeList();
   }
 
@@ -50,7 +53,7 @@ export class EmployeeListComponent implements OnInit{
   }
 
   updateEmployee(employeeId:number){
-    
+    this.router.navigate(['/employee',{employeeId: employeeId}])
   }
 
 }

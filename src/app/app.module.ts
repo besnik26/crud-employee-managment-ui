@@ -8,7 +8,6 @@ import { HeaderComponent } from './shared/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { EmployeeComponent } from './components/employee/employee.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
@@ -19,8 +18,11 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import {MatTableModule} from '@angular/material/table';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 
 
 @NgModule({
@@ -28,8 +30,10 @@ import {MatTableModule} from '@angular/material/table';
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    EmployeeComponent,
-    EmployeeListComponent
+    LoginComponent,
+    SignupComponent,
+    AdminDashboardComponent,
+    UserDashboardComponent
   ],
   imports: [
     BrowserModule,

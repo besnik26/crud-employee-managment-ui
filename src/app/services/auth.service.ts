@@ -15,4 +15,8 @@ export class AuthService {
   signup(data: { username: string; password: string; role: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/signup`, data);
   }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
 }

@@ -1,5 +1,9 @@
 <p>
   <mat-toolbar color="primary">
     <span>My Application</span>
+    <div *ngIf="authService.isLoggedIn()">
+
+      <button (click)="logout()">Logout</button>
+    </div>
   </mat-toolbar>
 </p>

@@ -19,12 +19,16 @@ const routes: Routes = [
   path: 'signup', component: SignupComponent
 },
 {
-  path: 'admin-dashboard', component: AdminDashboardComponent,
-  canActivate: [authGuard]
+  path: 'admin-dashboard',
+  component: AdminDashboardComponent,
+  canActivate: [authGuard],
+  data: { role: 'ROLE_ADMIN' }
 },
 {
-  path: 'user-dashboard', component: UserDashboardComponent,
-  canActivate: [authGuard]
+  path: 'user-dashboard',
+  component: UserDashboardComponent,
+  canActivate: [authGuard],
+  data: { role: 'ROLE_USER' }
 }
   
 ];

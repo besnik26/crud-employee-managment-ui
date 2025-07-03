@@ -19,4 +19,19 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
+
+  logout(): void {
+    localStorage.removeItem('token');
+  }
+
+  isTokenExpired(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) return true;
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const expiry = payload.exp;
+
+    return (Math.floor(Date.now() / 1000) > expiry);
+  }
+
 }

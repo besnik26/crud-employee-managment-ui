@@ -10,7 +10,11 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
 
 const routes: Routes = [
   
-  {path: '', component:HomeComponent},
+  {
+    path: '', 
+    component:HomeComponent,
+    data: { hideHeader: true } 
+  },
 
   {
   path: 'login', component: LoginComponent

@@ -1,0 +1,31 @@
+
+
+.custom-container{
+  display: flex;
+  justify-content: center;
+  .form-container{
+    width: 100%;
+    max-width: 450px;
+  
+    .form-field-div{
+      display: flex;
+      flex-direction: column;
+      input, select{
+        width: 100%;
+        border-radius: 4px;
+        outline: none;
+        padding: 6px 4px;
+        margin: 5px 0;
+      }
+      label{
+        padding-left: 4px;
+      }
+    }
+    button{
+      padding: 6px;
+      width: 100%;
+      max-width: 100px;
+      margin: 20px 0;
+    }
+  }
+}

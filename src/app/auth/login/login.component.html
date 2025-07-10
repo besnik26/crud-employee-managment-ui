@@ -1,14 +1,24 @@
-<div class="login-container">
-  <h2>Login</h2>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <label for="username">Username</label>
-    <input id="username" formControlName="username" required />
 
-    <label for="password">Password</label>
-    <input id="password" type="password" formControlName="password" required />
+<div class="custom-container">
 
-    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+  <form [formGroup]="loginForm" class="form-container">
+    <h2>Log in to EMS</h2>
+    <div class="form-field-div">
+      <label for="username">Username</label>
+      <input type="text" id="username" formControlName="username">
+    </div>
+  
+    <div class="form-field-div">
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password">
+    </div>
+    
+
+    <div class="d-flex flex-column align-items-center">
+      <button [disabled]="loginForm.invalid" (click)="onSubmit()">Log in</button>
+      <p>Don't have an account ? <a routerLink="/signup" >Sign in</a></p>
+    </div>
+  
   </form>
-
-  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
 </div>
+

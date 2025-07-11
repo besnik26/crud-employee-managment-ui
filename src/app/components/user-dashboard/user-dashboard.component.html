@@ -1,1 +1,21 @@
-<p>user-dashboard works!</p>
+<div *ngIf="user">
+  <h2>Welcome, {{ user.username }}</h2>
+  <p><strong>ID:</strong> {{ user.id }}</p>
+  <p><strong>Role:</strong> {{ user.role }}</p>
+
+  <div *ngIf="user.company">
+    <h3>Company Details</h3>
+    <p><strong>Name:</strong> {{ user.company.name }}</p>
+    <p><strong>Industry:</strong> {{ user.company.industry }}</p>
+    <p><strong>Location:</strong> {{ user.company.location }}</p>
+  </div>
+
+  <div *ngIf="companyUsers.length > 0">
+    <h3>Company Users</h3>
+    <ul>
+      <li *ngFor="let user of companyUsers">
+        {{ user.username }} ({{ user.role }})
+      </li>
+    </ul>
+  </div>
+</div>

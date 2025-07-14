@@ -16,7 +16,6 @@ const routes: Routes = [
     data: { hideHeader: true },
     canActivate: [RedirectIfAuthGuard]
   },
-
   {
     path: 'login', 
     component: LoginComponent,

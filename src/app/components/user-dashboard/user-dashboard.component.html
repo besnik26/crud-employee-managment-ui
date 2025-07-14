@@ -1,21 +1,37 @@
-<div *ngIf="user">
-  <h2>Welcome, {{ user.username }}</h2>
-  <p><strong>ID:</strong> {{ user.id }}</p>
-  <p><strong>Role:</strong> {{ user.role }}</p>
 
-  <div *ngIf="user.company">
-    <h3>Company Details</h3>
-    <p><strong>Name:</strong> {{ user.company.name }}</p>
-    <p><strong>Industry:</strong> {{ user.company.industry }}</p>
-    <p><strong>Location:</strong> {{ user.company.location }}</p>
+
+
+<div class="dashboard-cover" *ngIf="user">
+
+  <div class="personal-details">
+    <h2>Welcome, {{ user.username }}</h2>
+    <p><strong>ID:</strong> {{ user.id }}</p>
+    <p><strong>Role:</strong> {{ user.role }}</p>
   </div>
 
-  <div *ngIf="companyUsers.length > 0">
-    <h3>Company Users</h3>
-    <ul>
-      <li *ngFor="let user of companyUsers">
-        {{ user.username }} ({{ user.role }})
-      </li>
-    </ul>
+
+  <div class="company-details">
+    <div *ngIf="user.company">
+      <h2>Company Details</h2>
+      <p><strong>Name:</strong> {{ user.company.name }}</p>
+      <p><strong>Industry:</strong> {{ user.company.industry }}</p>
+      <p><strong>Location:</strong> {{ user.company.location }}</p>
+    </div>
+
+    <div *ngIf="companyUsers.length > 0">
+      <h3>Company Users</h3>
+      <ul>
+        <li *ngFor="let user of companyUsers">
+          {{ user.username }} ({{ user.role }})
+        </li>
+      </ul>
+    </div>
   </div>
+
+  <div class="img-div">
+      <img src="../../../assets/visual-data.svg" alt="visual-data">
+  </div>
+ 
+
+  
 </div>

@@ -1,1 +1,23 @@
-<p>admin-dashboard works!</p>
+<section *ngIf="dashboardData">
+  <p>Total Companies: {{ dashboardData.totalCompanies }}</p>
+  <p>Total Users: {{ dashboardData.totalUsers }}</p>
+</section>
+
+<div *ngFor="let company of companies" class="company-card">
+  <h3>{{ company.name }}</h3>
+  <p>Industry: {{ company.industry }}</p>
+  <p>Location: {{ company.location }}</p>
+  <div *ngIf="company.users.length > 0; else noUsers">
+    <ul>
+      <li *ngFor="let user of company.users">
+        👤 {{ user.username }} - {{ user.role }}
+      </li>
+    </ul>
+  </div>
+
+  <ng-template #noUsers>
+    <p>No users assigned to this company.</p>
+  </ng-template>
+</div>
+
+

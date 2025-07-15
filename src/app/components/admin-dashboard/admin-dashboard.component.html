@@ -1,10 +1,10 @@
 <section *ngIf="dashboardData">
+  <p>Welcome, {{dashboardData.adminUsername}}!</p>
   <p>Total Companies: {{ dashboardData.totalCompanies }}</p>
-  <p>Total Users: {{ dashboardData.totalUsers }}</p>
 </section>
 
 <div *ngFor="let company of companies" class="company-card">
-  <h3>{{ company.name }}</h3>
+  <h3>Company name:{{ company.name }}</h3>
   <p>Industry: {{ company.industry }}</p>
   <p>Location: {{ company.location }}</p>
   <div *ngIf="company.users.length > 0; else noUsers">

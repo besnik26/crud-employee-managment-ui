@@ -35,4 +35,11 @@ export class AdminService {
       headers: this.getAuthHeaders()
     });
   }
+
+  addCompany(data: { name: string; industry: string; location: string }): Observable<any> {
+    return this.http.post(`${this.baseUrl}`, data, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
 }

@@ -23,6 +23,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { AddCompanyComponent } from './components/admin-dashboard/add-company/add-company.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
     LoginComponent,
     SignupComponent,
     AdminDashboardComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    AddCompanyComponent
   ],
   imports: [
     BrowserModule,

@@ -42,4 +42,19 @@ export class AdminService {
     });
   }
 
+  updateCompany(companyId: number, companyData: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${companyId}`, companyData);
+  }
+
+  getCompanyById(companyId: number): Observable<CompanyWithUsersDto> {
+    return this.http.get<CompanyWithUsersDto>(`${this.baseUrl}/${companyId}`);
+  }
+
+  deleteCompany(companyId: number): Observable<string> {
+    return this.http.delete(`${this.baseUrl}/${companyId}`, { responseType: 'text' });
+  }
+
+
+
+
 }

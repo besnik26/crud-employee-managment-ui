@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-add-company',
@@ -6,5 +9,26 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-company.component.scss']
 })
 export class AddCompanyComponent {
+  companyForm: FormGroup;
 
+  constructor(
+    private fb: FormBuilder,
+    private adminService: AdminService,
+    private router: Router
+  ) {
+    this.companyForm = this.fb.group({
+      name: ['', Validators.required],
+      industry: ['', Validators.required],
+      location: ['', Validators.required]
+    });
+  }
+
+  onSubmit() {
+    if (this.companyForm.valid) {
+      this.adminService.addCompany(this.companyForm.value).subscribe({
+        next: () => this.router.navigate(['/admin-dashboard']),
+        error: err => alert('Failed to add company: ' + err.message)
+      });
+    }
+  }
 }

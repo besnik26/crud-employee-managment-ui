@@ -17,13 +17,15 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { AddCompanyComponent } from './components/admin-dashboard/add-company/add-company.component';
+import { EditCompanyComponent } from './components/admin-dashboard/edit-company/edit-company.component';
+import { AuthInterceptor } from './auth.interceptor';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { AddCompanyComponent } from './components/admin-dashboard/add-company/ad
     SignupComponent,
     AdminDashboardComponent,
     UserDashboardComponent,
-    AddCompanyComponent
+    AddCompanyComponent,
+    EditCompanyComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,13 @@ import { AddCompanyComponent } from './components/admin-dashboard/add-company/ad
     ReactiveFormsModule,
     MatTableModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

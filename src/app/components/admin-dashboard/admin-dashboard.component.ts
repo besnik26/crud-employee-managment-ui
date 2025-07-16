@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { AdminService } from 'src/app/services/admin.service';
 import { AdminDashboardDto } from 'src/app/models/admin-dashboard-dto.model';
 import { CompanyWithUsersDto } from 'src/app/models/CompanyWithUsersDto';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -12,11 +13,27 @@ export class AdminDashboardComponent implements OnInit{
   dashboardData?: AdminDashboardDto;
   companies: CompanyWithUsersDto[] = [];
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService, public router:Router) {}
 
   ngOnInit(): void {
     this.adminService.getDashboard().subscribe(data => this.dashboardData = data);
     this.adminService.getMyCompanies().subscribe(data => this.companies = data);
   }
+
+  deleteCompany(companyId: number): void {
+  if (confirm('Are you sure you want to delete this company?')) {
+    this.adminService.deleteCompany(companyId).subscribe({
+      next: () => {
+        this.ngOnInit();
+        alert('Company deleted successfully.');
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Failed to delete company.');
+      }
+    });
+  }
+}
+
 
 }

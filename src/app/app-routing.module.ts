@@ -1,3 +1,4 @@
+import { CompanyDetailsComponent } from './components/admin-dashboard/company-details/company-details.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
@@ -33,6 +34,11 @@ const routes: Routes = [
     component: AdminDashboardComponent,
     canActivate: [authGuard],
     data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path: 'company-details/:companyId',
+    component: CompanyDetailsComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'user-dashboard',

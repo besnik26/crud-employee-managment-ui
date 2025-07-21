@@ -31,6 +31,23 @@
   <div class="img-div">
       <img src="../../../assets/visual-data.svg" alt="visual-data">
   </div>
+
+  <div>
+      <div *ngIf="joinRequests.length > 0">
+        <h3>Pending Company Join Requests</h3>
+        <ul>
+          <li *ngFor="let request of joinRequests">
+            <strong>{{ request.company.name }}</strong> invited you to join.
+            <button (click)="respond(request.id, true)">Accept</button>
+            <button (click)="respond(request.id, false)">Reject</button>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="joinRequests.length === 0">
+        <p>No join requests.</p>
+      </div>
+
+  </div>
  
 
   

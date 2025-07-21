@@ -16,7 +16,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import { LoginComponent } from './auth/login/login.component';
@@ -26,6 +26,7 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
 import { AddCompanyComponent } from './components/admin-dashboard/add-company/add-company.component';
 import { EditCompanyComponent } from './components/admin-dashboard/edit-company/edit-company.component';
 import { AuthInterceptor } from './auth.interceptor';
+import { CompanyDetailsComponent } from './components/admin-dashboard/company-details/company-details.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { AuthInterceptor } from './auth.interceptor';
     AdminDashboardComponent,
     UserDashboardComponent,
     AddCompanyComponent,
-    EditCompanyComponent
+    EditCompanyComponent,
+    CompanyDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,8 @@ import { AuthInterceptor } from './auth.interceptor';
     MatDividerModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule
   ],
   providers: [
     {

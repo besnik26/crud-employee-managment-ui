@@ -30,6 +30,7 @@ export class AdminService {
     });
   }
 
+
   getUsersByCompany(companyId: number): Observable<UserDto[]> {
     return this.http.get<UserDto[]>(`${this.baseUrl}/${companyId}/users`, {
       headers: this.getAuthHeaders()
@@ -50,10 +51,21 @@ export class AdminService {
     return this.http.get<CompanyWithUsersDto>(`${this.baseUrl}/${companyId}`);
   }
 
+  getCompanyUsers(companyId: number) {
+    return this.http.get<any[]>(`http://localhost:9090/api/users/company/${companyId}/users`, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
   deleteCompany(companyId: number): Observable<string> {
     return this.http.delete(`${this.baseUrl}/${companyId}`, { responseType: 'text' });
   }
 
+
+  
+  removeUserFromCompany(userId: number) {
+    return this.http.put(`${this.baseUrl}/users/remove/${userId}`, {});
+  }
 
 
 

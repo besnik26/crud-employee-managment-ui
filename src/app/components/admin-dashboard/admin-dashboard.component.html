@@ -18,6 +18,7 @@
   <ng-template #noUsers>
     <p>No users assigned to this company.</p>
   </ng-template>
+  <button (click)="router.navigate(['/company-details/', company.id])">See details</button>
   <button (click)="router.navigate(['/edit-company', company.id])">Edit</button>
   <button (click)="deleteCompany(company.id)">Delete</button>
 

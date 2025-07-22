@@ -26,8 +26,18 @@ export class UserDashboardComponent {
       this.user = data;
     });
 
-    this.userService.getCompanyUsers().subscribe((users) => {
-      this.companyUsers = users;
+    this.userService.getCompanyUsers().subscribe({
+      next: (users) => {
+        this.companyUsers = users;
+      },
+      error: (err) => {
+        if (err.status === 500) {
+          this.companyUsers = [];
+          console.warn('User not assigned to any company.');
+        } else {
+          console.error('Unexpected error loading company users:', err);
+        }
+      }
     });
   }
 
@@ -41,7 +51,7 @@ export class UserDashboardComponent {
 
   respond(requestId: number, accepted: boolean) {
     this.joinRequestService.respondToRequest(requestId, accepted).subscribe({
-      next: () => setTimeout(() => this.loadDashboard(), 500),
+      next: () => this.loadDashboard(),
       error: (err) => console.error(err),
     });
   }

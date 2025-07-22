@@ -63,9 +63,11 @@ export class AdminService {
 
 
   
-  removeUserFromCompany(userId: number) {
-    return this.http.put(`${this.baseUrl}/users/remove/${userId}`, {});
-  }
+  removeUserFromCompany(companyId: number, userId: number) {
+  return this.http.put(`${this.baseUrl}/${companyId}/remove-user/${userId}`, {}, {
+    headers: this.getAuthHeaders()
+  });
+}
 
 
 

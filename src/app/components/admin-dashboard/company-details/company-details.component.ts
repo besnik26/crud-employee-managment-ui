@@ -56,12 +56,15 @@ export class CompanyDetailsComponent {
     this.joinRequestService.sendJoinRequest(this.userIdToInvite, this.companyId).subscribe({
       next: () => {
         this.message = 'Join request sent successfully.';
-        this.userIdToInvite = 0;
       },
       error: (err) => {
-        this.message = 'Error sending request.';
+        if (err.status === 400 && err.error?.error?.includes("already exists")) {
+          this.message = "This user already has a pending request.";
+        } else {
+          this.message = "Error sending request.";
+        }
         console.error(err);
-      },
+      }
     });
   }
 }

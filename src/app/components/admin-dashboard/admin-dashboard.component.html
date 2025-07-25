@@ -28,5 +28,14 @@
 </div>
 <button routerLink="/add-company" class="add-btn">Add Company</button>
 
+<div *ngIf="notifications.length > 0" class="notifications-panel">
+  <h3>Notifications</h3>
+  <ul>
+    <li *ngFor="let n of notifications">
+      {{ n.message }} <small>({{ n.createdAt | date:'short' }})</small>
+    </li>
+  </ul>
+</div>
+
 
 

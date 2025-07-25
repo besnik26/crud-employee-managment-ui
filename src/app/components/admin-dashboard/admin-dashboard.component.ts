@@ -12,28 +12,37 @@ import { Router } from '@angular/router';
 export class AdminDashboardComponent implements OnInit{
   dashboardData?: AdminDashboardDto;
   companies: CompanyWithUsersDto[] = [];
+  notifications: any[] = [];
 
   constructor(private adminService: AdminService, public router:Router) {}
 
   ngOnInit(): void {
     this.adminService.getDashboard().subscribe(data => this.dashboardData = data);
     this.adminService.getMyCompanies().subscribe(data => this.companies = data);
+    this.loadNotifications();
   }
 
-  deleteCompany(companyId: number): void {
-  if (confirm('Are you sure you want to delete this company?')) {
-    this.adminService.deleteCompany(companyId).subscribe({
-      next: () => {
-        this.ngOnInit();
-        alert('Company deleted successfully.');
-      },
-      error: (err) => {
-        console.error(err);
-        alert('Failed to delete company.');
-      }
+  loadNotifications():void{
+    this.adminService.getNotifications().subscribe({
+      next: (data) => this.notifications = data,
+      error: (err) => console.error('Error loading notifications', err)
     });
+  }  
+
+  deleteCompany(companyId: number): void {
+    if (confirm('Are you sure you want to delete this company?')) {
+      this.adminService.deleteCompany(companyId).subscribe({
+        next: () => {
+          this.ngOnInit();
+          alert('Company deleted successfully.');
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Failed to delete company.');
+        }
+      });
+    }
   }
-}
 
 
 }

@@ -64,10 +64,20 @@ export class AdminService {
 
   
   removeUserFromCompany(companyId: number, userId: number) {
-  return this.http.put(`${this.baseUrl}/${companyId}/remove-user/${userId}`, {}, {
-    headers: this.getAuthHeaders()
-  });
-}
+    return this.http.put(`${this.baseUrl}/${companyId}/remove-user/${userId}`, {}, {
+      headers: this.getAuthHeaders()
+    });
+  }
+  
+
+  getNotifications(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:9090/api/notifications', {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+
+
 
 
 

@@ -33,6 +33,7 @@
   <ul>
     <li *ngFor="let n of notifications">
       {{ n.message }} <small>({{ n.createdAt | date:'short' }})</small>
+      <button (click)="markAsRead(n.id)">Mark as read</button>
     </li>
   </ul>
 </div>

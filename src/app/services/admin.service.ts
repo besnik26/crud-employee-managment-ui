@@ -76,6 +76,13 @@ export class AdminService {
     });
   }
 
+  markNotificationAsRead(id: number): Observable<any> {
+    return this.http.post<any>(`http://localhost:9090/api/notifications/mark-read/${id}`, {}, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+
 
 
 

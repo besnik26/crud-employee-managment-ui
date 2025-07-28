@@ -44,5 +44,17 @@ export class AdminDashboardComponent implements OnInit{
     }
   }
 
+  markAsRead(notificationId: number): void {
+    this.adminService.markNotificationAsRead(notificationId).subscribe({
+      next: () => {
+        this.notifications = this.notifications.filter(n => n.id !== notificationId);
+      },
+      error: (err) => {
+        console.error('Failed to mark notification as read', err);
+      }
+    });
+  }
+
+
 
 }

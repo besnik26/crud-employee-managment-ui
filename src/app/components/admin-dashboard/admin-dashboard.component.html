@@ -1,32 +1,40 @@
 <section *ngIf="dashboardData">
-  <p>Welcome, {{dashboardData.adminUsername}}!</p>
-  <p>Total Companies: {{ dashboardData.totalCompanies }}</p>
+  <h1>Welcome, {{dashboardData.adminUsername}}!</h1>
+
+  <div class="total-companies">
+    <h3>Total Companies: {{ dashboardData.totalCompanies }}</h3>
+    <button routerLink="/add-company" class="add-btn">Add Company</button>
+  </div>
 </section>
 
-<div *ngFor="let company of companies" class="company-card">
-  <h3>Company name:{{ company.name }}</h3>
-  <p>Industry: {{ company.industry }}</p>
-  <p>Location: {{ company.location }}</p>
-  <div *ngIf="company.users.length > 0; else noUsers">
-    <ul>
-      <li *ngFor="let user of company.users">
-        👤 {{ user.username }} - {{ user.role }}
-      </li>
-    </ul>
+<div class="company-container">
+
+  <div *ngFor="let company of companies" class="company-card">
+    <h1>{{ company.name }}</h1>
+    <div class="d-flex">
+      <mat-icon aria-hidden="false" aria-label="Example location icon" fontIcon="location_on"></mat-icon>
+      <p>{{ company.location }}</p>
+    </div>
+    <div *ngIf="company.users.length > 0; else noUsers">
+      <p>{{company.users.length}}</p>
+    </div>
+  
+    <ng-template #noUsers>
+      <p>No users assigned.</p>
+    </ng-template>
+    <button (click)="router.navigate(['/company-details/', company.id])">See details</button>
+    <div>
+      <button (click)="router.navigate(['/edit-company', company.id])">
+              <mat-icon aria-hidden="false" aria-label="Example edit icon" fontIcon="edit"></mat-icon>
+      </button>
+      <button (click)="deleteCompany(company.id)">
+        <mat-icon aria-hidden="false" aria-label="Example delete icon" fontIcon="delete"></mat-icon>
+      </button>
+    </div>
+
   </div>
-
-  <ng-template #noUsers>
-    <p>No users assigned to this company.</p>
-  </ng-template>
-  <button (click)="router.navigate(['/company-details/', company.id])">See details</button>
-  <button (click)="router.navigate(['/edit-company', company.id])">Edit</button>
-  <button (click)="deleteCompany(company.id)">Delete</button>
-
-
-  <hr>
-
 </div>
-<button routerLink="/add-company" class="add-btn">Add Company</button>
+
 
 <div *ngIf="notifications.length > 0" class="notifications-panel">
   <h3>Notifications</h3>

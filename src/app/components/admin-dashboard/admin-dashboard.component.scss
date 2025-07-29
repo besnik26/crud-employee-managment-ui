@@ -8,3 +8,19 @@
     }
   }
 }
+.total-companies{
+  display: flex;
+  justify-content: space-between;
+}
+.company-container{
+  display: flex;
+  gap: 30px;
+  padding: 0 16px;
+  .company-card{
+    min-height: 250px;
+    padding: 25px 70px;
+    border: 1px solid black;
+    border-radius: 30px;
+
+  }
+}

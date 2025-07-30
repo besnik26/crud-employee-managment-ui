@@ -8,19 +8,54 @@
     }
   }
 }
+.title{
+  font-size: 40px;
+  font-weight: bolder;
+  font-style: italic;
+}
 .total-companies{
   display: flex;
   justify-content: space-between;
+  width: auto;
+  h3{
+    font-weight: bold;
+  }
 }
 .company-container{
   display: flex;
   gap: 30px;
-  padding: 0 16px;
   .company-card{
+    position: relative;
     min-height: 250px;
-    padding: 25px 70px;
-    border: 1px solid black;
+    padding: 25px;
+    min-width: 350px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
     border-radius: 30px;
-
+    p{
+      margin:  0 0 0 5px;
+    }
+    h1{
+      color: #f44336;
+      font-weight: bold;
+    }
+    button{
+      border: 1px solid black;
+      border-radius: 5px;
+      height: 30px;
+    }
+    .btn-absolute-div{
+      position: absolute;
+      display: flex;
+      gap: 5px;
+      top: 25px;
+      right: 25px;
+      button{
+        padding: 0 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
   }
 }

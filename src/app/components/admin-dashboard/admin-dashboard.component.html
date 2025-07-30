@@ -1,37 +1,46 @@
 <section *ngIf="dashboardData">
-  <h1>Welcome, {{dashboardData.adminUsername}}!</h1>
+  <h1 class="title mt-4">Welcome, {{dashboardData.adminUsername}}!</h1>
 
-  <div class="total-companies">
+  
+</section>
+
+<div style="width: auto;">
+  <div class="total-companies" *ngIf="dashboardData">
     <h3>Total Companies: {{ dashboardData.totalCompanies }}</h3>
     <button routerLink="/add-company" class="add-btn">Add Company</button>
   </div>
-</section>
-
-<div class="company-container">
-
-  <div *ngFor="let company of companies" class="company-card">
-    <h1>{{ company.name }}</h1>
-    <div class="d-flex">
-      <mat-icon aria-hidden="false" aria-label="Example location icon" fontIcon="location_on"></mat-icon>
-      <p>{{ company.location }}</p>
-    </div>
-    <div *ngIf="company.users.length > 0; else noUsers">
-      <p>{{company.users.length}}</p>
-    </div>
+  <div class="company-container">
+    <div *ngFor="let company of companies" class="company-card">
+      <h1>{{ company.name }}</h1>
+      <div class="d-flex align-items-center mb-2">
+        <mat-icon aria-hidden="false" aria-label="Example location icon" fontIcon="location_on"></mat-icon>
+        <p>{{ company.location }}</p>
+      </div>
+      <div class="d-flex align-items-center mb-2" *ngIf="company.users.length === 1">
+        <mat-icon aria-hidden="false" aria-label="Example location icon" fontIcon="group"></mat-icon>
+        <p>{{company.users.length}} member</p>
+      </div>
+      <div class="d-flex align-items-center mb-2" *ngIf="company.users.length > 1">
+        <mat-icon aria-hidden="false" aria-label="Example location icon" fontIcon="group"></mat-icon>
+        <p>{{company.users.length}} members</p>
+      </div>
   
-    <ng-template #noUsers>
-      <p>No users assigned.</p>
-    </ng-template>
-    <button (click)="router.navigate(['/company-details/', company.id])">See details</button>
-    <div>
-      <button (click)="router.navigate(['/edit-company', company.id])">
-              <mat-icon aria-hidden="false" aria-label="Example edit icon" fontIcon="edit"></mat-icon>
-      </button>
-      <button (click)="deleteCompany(company.id)">
-        <mat-icon aria-hidden="false" aria-label="Example delete icon" fontIcon="delete"></mat-icon>
-      </button>
+      <div *ngIf="company.users.length === 0;">
+        <p>No members assigned</p>
+      </div>
+    
+      
+      <button (click)="router.navigate(['/company-details/', company.id])">See details</button>
+      <div class="btn-absolute-div">
+        <button (click)="router.navigate(['/edit-company', company.id])">
+                <mat-icon aria-hidden="false" aria-label="Example edit icon" fontIcon="edit"></mat-icon>
+        </button>
+        <button (click)="deleteCompany(company.id)">
+          <mat-icon aria-hidden="false" aria-label="Example delete icon" fontIcon="delete"></mat-icon>
+        </button>
+      </div>
+  
     </div>
-
   </div>
 </div>
 

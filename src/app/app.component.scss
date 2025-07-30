@@ -1,0 +1,9 @@
+.custom-container{
+    padding: 0 32px;
+}
+
+@media only screen and (max-width: 760px) {
+    .custom-container{
+        padding: 0 16px;
+    }
+}

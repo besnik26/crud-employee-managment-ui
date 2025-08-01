@@ -11,7 +11,6 @@
 .title{
   font-size: 40px;
   font-weight: bolder;
-  font-style: italic;
 }
 .total-companies{
   display: flex;
@@ -36,9 +35,9 @@
       margin:  0 0 0 5px;
     }
     h1{
-      color: #f44336;
       font-weight: bold;
     }
+    
     button{
       border: 1px solid black;
       border-radius: 5px;
@@ -55,6 +54,37 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: white;
+        height: 27px; 
+      }
+      mat-icon{
+        font-size: 19px;
+        height: auto;
+      }
+      .edit{
+        border: 1px solid lightblue;
+        mat-icon{
+          color: lightblue;
+        }
+
+        &:hover{
+          background-color: lightblue;
+          mat-icon{
+            color: white;
+          }
+        }
+      }
+      .delete{
+        border: 1px solid red;
+        mat-icon{
+          color: red;
+        }
+        &:hover{
+          background-color: red;
+          mat-icon{
+            color: white;
+          }
+        }
       }
     }
   }

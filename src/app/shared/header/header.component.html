@@ -1,9 +1,11 @@
 <p>
   <mat-toolbar color="primary" class="navbar">
     <span>NCL - Employee Managment System</span>
-    <div *ngIf="authService.isLoggedIn()">
+    <div style="width: auto;" *ngIf="authService.isLoggedIn()">
 
-      <button (click)="logout()">Logout</button>
+      <button (click)="logout()">
+        <mat-icon aria-hidden="false" aria-label="Example location icon" fontIcon="logout"></mat-icon>
+      </button>
     </div>
   </mat-toolbar>
 </p>

@@ -1,7 +1,30 @@
 .navbar{
     width: 100%;
     padding: 0 32px;
+    button{
+        padding: 0 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        border: 1px solid rgb(47, 124, 226);
+        height: 35px;
+        border-radius: 4px;
+        mat-icon{
+          color: rgb(47, 124, 226);
+          font-size: 25px;
+          height: auto;
+        }
+        &:hover{
+          background-color: rgb(47, 124, 226);
+          border: 1px solid white;
+          mat-icon{
+            color: white;
+          }
+        }
+    }
 }
 
 @media only screen and (max-width: 600px) {
+
 }

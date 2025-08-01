@@ -4,7 +4,7 @@
   
 </section>
 
-<div style="width: auto;">
+<div>
   <div class="total-companies" *ngIf="dashboardData">
     <h3>Total Companies: {{ dashboardData.totalCompanies }}</h3>
     <button routerLink="/add-company" class="add-btn">Add Company</button>
@@ -13,15 +13,15 @@
     <div *ngFor="let company of companies" class="company-card">
       <h1>{{ company.name }}</h1>
       <div class="d-flex align-items-center mb-2">
-        <mat-icon aria-hidden="false" aria-label="Example location icon" fontIcon="location_on"></mat-icon>
+        <mat-icon style="color: red;" aria-hidden="false" aria-label="Example location icon" fontIcon="location_on"></mat-icon>
         <p>{{ company.location }}</p>
       </div>
       <div class="d-flex align-items-center mb-2" *ngIf="company.users.length === 1">
-        <mat-icon aria-hidden="false" aria-label="Example location icon" fontIcon="group"></mat-icon>
+        <mat-icon style="color: blue;" aria-hidden="false" aria-label="Example location icon" fontIcon="group"></mat-icon>
         <p>{{company.users.length}} member</p>
       </div>
       <div class="d-flex align-items-center mb-2" *ngIf="company.users.length > 1">
-        <mat-icon aria-hidden="false" aria-label="Example location icon" fontIcon="group"></mat-icon>
+        <mat-icon style="color: blue;" aria-hidden="false" aria-label="Example location icon" fontIcon="group"></mat-icon>
         <p>{{company.users.length}} members</p>
       </div>
   
@@ -32,10 +32,10 @@
       
       <button (click)="router.navigate(['/company-details/', company.id])">See details</button>
       <div class="btn-absolute-div">
-        <button (click)="router.navigate(['/edit-company', company.id])">
+        <button class="edit" (click)="router.navigate(['/edit-company', company.id])">
                 <mat-icon aria-hidden="false" aria-label="Example edit icon" fontIcon="edit"></mat-icon>
         </button>
-        <button (click)="deleteCompany(company.id)">
+        <button class="delete" (click)="deleteCompany(company.id)">
           <mat-icon aria-hidden="false" aria-label="Example delete icon" fontIcon="delete"></mat-icon>
         </button>
       </div>

@@ -1,5 +1,5 @@
 <section *ngIf="dashboardData">
-  <h1 class="title mt-4">Welcome, {{dashboardData.adminUsername}}!</h1>
+  <h1 class="title mt-4 mb-5 text-center">Welcome, {{dashboardData.adminUsername}}!</h1>
 
   
 </section>
@@ -7,7 +7,7 @@
 <div>
   <div class="total-companies" *ngIf="dashboardData">
     <h3>Total Companies: {{ dashboardData.totalCompanies }}</h3>
-    <button routerLink="/add-company" class="add-btn">Add Company</button>
+    <button routerLink="/add-company" class="add-btn">Add Company +</button>
   </div>
   <div class="company-container">
     <div *ngFor="let company of companies" class="company-card">
@@ -25,7 +25,7 @@
         <p>{{company.users.length}} members</p>
       </div>
   
-      <div *ngIf="company.users.length === 0;">
+      <div class="mb-2" *ngIf="company.users.length === 0;">
         <p>No members assigned</p>
       </div>
     
@@ -51,6 +51,22 @@
     <li *ngFor="let n of notifications">
       {{ n.message }} <small>({{ n.createdAt | date:'short' }})</small>
       <button (click)="markAsRead(n.id)">Mark as read</button>
+    </li>
+  </ul>
+</div>
+
+<div class="notification-wrapper">
+  <mat-icon aria-hidden="false" (click)="toggleNotifications()" aria-label="Example location icon" fontIcon="notifications"></mat-icon>
+  <div>
+    <span *ngIf="notifications.length > 0" class="badge">{{ notifications.length }}</span>
+  </div>
+</div>
+
+<div *ngIf="showNotifications">
+  <ul>
+    <li *ngFor="let notification of notifications">
+      {{ notification.message }}
+      <button (click)="markAsRead(notification.id)">Mark as Read</button>
     </li>
   </ul>
 </div>

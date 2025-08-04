@@ -1,7 +1,25 @@
 <p>
   <mat-toolbar color="primary" class="navbar">
     <span>NCL - Employee Managment System</span>
-    <div style="width: auto;" *ngIf="authService.isLoggedIn()">
+    <div style="width: auto;" class="d-flex align-items-center" *ngIf="authService.isLoggedIn()">
+      <div style="position: relative;">
+        <div class="notification-wrapper" (click)="toggleNotifications()">
+            <mat-icon aria-hidden="false"  aria-label="Example location icon" fontIcon="notifications"></mat-icon>
+            <div>
+              <span *ngIf="notifications.length > 0" class="badge">{{ notifications.length }}</span>
+            </div>
+          </div>
+
+          <div class="show-notifications" *ngIf="showNotifications">
+            <ul>
+              <li *ngFor="let notification of notifications">
+                {{ notification.message }}
+                <button (click)="markAsRead(notification.id)">Mark as Read</button>
+              </li>
+            </ul>
+          </div>
+      </div>
+      
 
       <button (click)="logout()">
         <mat-icon aria-hidden="false" aria-label="Example location icon" fontIcon="logout"></mat-icon>

@@ -13,6 +13,7 @@ export class AdminDashboardComponent implements OnInit{
   dashboardData?: AdminDashboardDto;
   companies: CompanyWithUsersDto[] = [];
   notifications: any[] = [];
+  showNotifications = false;
 
   constructor(private adminService: AdminService, public router:Router) {}
 
@@ -54,6 +55,10 @@ export class AdminDashboardComponent implements OnInit{
       }
     });
   }
+
+  toggleNotifications(): void {
+  this.showNotifications = !this.showNotifications;
+}
 
 
 

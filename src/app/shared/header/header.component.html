@@ -3,20 +3,22 @@
     <span>NCL - Employee Managment System</span>
     <div style="width: auto;" class="d-flex align-items-center" *ngIf="authService.isLoggedIn()">
       <div style="position: relative;">
-        <div class="notification-wrapper" (click)="toggleNotifications()">
+        <div class="notification-wrapper mr-5" (click)="toggleNotifications()">
             <mat-icon aria-hidden="false"  aria-label="Example location icon" fontIcon="notifications"></mat-icon>
             <div>
               <span *ngIf="notifications.length > 0" class="badge">{{ notifications.length }}</span>
             </div>
-          </div>
+        </div>
 
           <div class="show-notifications" *ngIf="showNotifications">
-            <ul>
-              <li *ngFor="let notification of notifications">
-                {{ notification.message }}
-                <button (click)="markAsRead(notification.id)">Mark as Read</button>
-              </li>
-            </ul>
+            <div class="notification-div">
+              <ul>
+                <li *ngFor="let notification of notifications">
+                  {{ notification.message }}
+                  <button (click)="markAsRead(notification.id)">Mark as Read</button>
+                </li>
+              </ul>
+            </div>
           </div>
       </div>
       

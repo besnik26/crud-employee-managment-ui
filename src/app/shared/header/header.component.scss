@@ -2,17 +2,17 @@
     width: 100%;
     padding: 0 32px;
     button{
-        padding: 0 4px;
+        padding: 0 2px;
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: white;
         border: 1px solid rgb(47, 124, 226);
-        height: 35px;
+        height: 25px;
         border-radius: 4px;
         mat-icon{
           color: rgb(47, 124, 226);
-          font-size: 25px;
+          font-size: 20px;
           height: auto;
         }
         &:hover{
@@ -29,17 +29,19 @@
   width: 30px;
   height: auto;
   position: relative;
+  display: flex;
+  align-items: center;
   cursor: pointer;
+  margin-right: 20px;
   .badge {
     position: absolute;
     top: -5px;
     right: -5px;
     background-color: red;
-    // padding: 2px 6px;
     border-radius: 50%;
+    font-size: 11px;
     span{
       color: white;
-      font-size: 12px;
     }
   }
 }
@@ -47,13 +49,33 @@
 .show-notifications{
   position: absolute;
   bottom: -110px;
-  right: 0px;
+  right: 0px;  
   background-color: white;
   border: 1px solid black;
-  width: 200px;
+  width: 300px;
   height: auto;
   color: black;
   font-size: 14px;
+  display: flex;
+
+  .notification-div{
+    width: 100%;
+    height: 100%;
+    padding: 2px 4px;
+  }
+  ul{
+    width: 100%;
+    padding: 0 0 0 16px;
+    li{
+      display: flex;
+      align-items: center;
+      font-size:12px;
+      word-wrap: break-word;
+      white-space: normal;
+      max-width: 250px;
+      line-height: 1.2;
+    }
+  }
 
 }
 

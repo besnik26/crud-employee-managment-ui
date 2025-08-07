@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UserContextService } from './user-context.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private baseUrl = 'http://localhost:9090/api/auth';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private userContext: UserContextService) {}
 
   login(credentials: { username: string; password: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, credentials);
@@ -23,6 +24,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+    this.userContext.clear();
   }
 
   isTokenExpired(): boolean {

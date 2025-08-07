@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { UserContextService } from 'src/app/services/user-context.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +12,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private userContext: UserContextService) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -24,6 +25,7 @@ export class LoginComponent {
         next: (response) => {
           localStorage.setItem('token', response.token);
           const decodedToken = this.decodeToken(response.token);
+          this.userContext.setRoleFromToken();
           if (decodedToken.role === 'ROLE_ADMIN') {
             this.router.navigate(['/admin-dashboard']);
           } else {

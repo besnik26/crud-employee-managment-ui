@@ -1,24 +1,26 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { AdminService } from './admin.service';
+import { JoinRequestService } from './join-request.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserContextService {
-    private roleSubject = new BehaviorSubject<string | null>(this.extractRoleFromToken());
+  private roleSubject = new BehaviorSubject<string | null>(this.extractRoleFromToken());
   private notificationsSubject = new BehaviorSubject<any[]>([]);
 
   role$ = this.roleSubject.asObservable();
   notifications$ = this.notificationsSubject.asObservable();
 
-  constructor(private adminService: AdminService) {
+  constructor(private adminService: AdminService, private joinRequestService: JoinRequestService) {
     this.refreshNotifications(); // load if admin
+      setInterval(() => this.refreshNotifications(), 60000);
+
   }
 
-  setRoleFromToken(): void {
+   setRoleFromToken(): void {
     const role = this.extractRoleFromToken();
     this.roleSubject.next(role);
-    if (role === 'admin') this.refreshNotifications();
-    else this.notificationsSubject.next([]); // clear if not admin
+    this.refreshNotifications();
   }
 
   private extractRoleFromToken(): string | null {
@@ -33,22 +35,41 @@ export class UserContextService {
   }
 
   refreshNotifications(): void {
-    if (this.roleSubject.value === 'admin') {
+    const role = this.roleSubject.value;
+
+    if (role === 'admin') {
       this.adminService.getNotifications().subscribe({
         next: data => this.notificationsSubject.next(data),
-        error: err => console.error('Error loading notifications', err)
+        error: err => console.error('Error loading admin notifications', err)
+      });
+    } 
+    else if (role === 'user') {
+      this.joinRequestService.getPendingRequests().subscribe({
+        next: requests => this.notificationsSubject.next(requests),
+        error: err => console.error('Error loading join requests', err)
       });
     }
   }
 
   markAsRead(notificationId: number): void {
-    this.adminService.markNotificationAsRead(notificationId).subscribe({
-      next: () => {
-        const updated = this.notificationsSubject.value.filter(n => n.id !== notificationId);
-        this.notificationsSubject.next(updated);
-      },
-      error: err => console.error('Error marking notification as read', err)
-    });
+    if (this.roleSubject.value === 'admin') {
+      this.adminService.markNotificationAsRead(notificationId).subscribe({
+        next: () => {
+          const updated = this.notificationsSubject.value.filter(n => n.id !== notificationId);
+          this.notificationsSubject.next(updated);
+        },
+        error: err => console.error('Error marking notification as read', err)
+      });
+    }
+  }
+
+  respondToJoinRequest(requestId: number, accepted: boolean): void {
+    if (this.roleSubject.value === 'user') {
+      this.joinRequestService.respondToRequest(requestId, accepted).subscribe({
+        next: () => this.refreshNotifications(),
+        error: err => console.error('Error responding to join request', err)
+      });
+    }
   }
 
   clear(): void {

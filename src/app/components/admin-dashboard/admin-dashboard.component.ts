@@ -12,23 +12,15 @@ import { Router } from '@angular/router';
 export class AdminDashboardComponent implements OnInit{
   dashboardData?: AdminDashboardDto;
   companies: CompanyWithUsersDto[] = [];
-  notifications: any[] = [];
-  showNotifications = false;
 
   constructor(private adminService: AdminService, public router:Router) {}
 
   ngOnInit(): void {
     this.adminService.getDashboard().subscribe(data => this.dashboardData = data);
     this.adminService.getMyCompanies().subscribe(data => this.companies = data);
-    this.loadNotifications();
   }
 
-  loadNotifications():void{
-    this.adminService.getNotifications().subscribe({
-      next: (data) => this.notifications = data,
-      error: (err) => console.error('Error loading notifications', err)
-    });
-  }  
+
 
   deleteCompany(companyId: number): void {
     if (confirm('Are you sure you want to delete this company?')) {
@@ -44,21 +36,6 @@ export class AdminDashboardComponent implements OnInit{
       });
     }
   }
-
-  markAsRead(notificationId: number): void {
-    this.adminService.markNotificationAsRead(notificationId).subscribe({
-      next: () => {
-        this.notifications = this.notifications.filter(n => n.id !== notificationId);
-      },
-      error: (err) => {
-        console.error('Failed to mark notification as read', err);
-      }
-    });
-  }
-
-  toggleNotifications(): void {
-  this.showNotifications = !this.showNotifications;
-}
 
 
 

@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserContextService } from 'src/app/services/user-context.service';
+import { DashboardService } from 'src/app/services/dashboard.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -15,16 +16,19 @@ export class HeaderComponent  implements OnInit{
   constructor(
     public authService: AuthService,
     private router: Router,
-    private userContext: UserContextService
+    private userContext: UserContextService,
+    private dashboardService: DashboardService
   ) {}
 
   ngOnInit(): void {
     this.userContext.role$.subscribe(role => {
       this.role = role || '';
-    });
 
-    this.userContext.notifications$.subscribe(notifications => {
-      this.notifications = notifications;
+      if (this.role === 'admin') {
+        this.userContext.notifications$.subscribe(n => this.notifications = n);
+      } else if (this.role === 'user') {
+        this.dashboardService.joinRequests$.subscribe(r => this.notifications = r);
+      }
     });
   }
 
@@ -33,7 +37,15 @@ export class HeaderComponent  implements OnInit{
   }
 
   markAsRead(notificationId: number): void {
-    this.userContext.markAsRead(notificationId);
+    if (this.role === 'admin') {
+      this.userContext.markAsRead(notificationId);
+    }
+  }
+
+  respond(requestId: number, accepted: boolean): void {
+    if (this.role === 'user') {
+      this.dashboardService.respondToJoinRequest(requestId, accepted);
+    }
   }
 
   logout(): void {

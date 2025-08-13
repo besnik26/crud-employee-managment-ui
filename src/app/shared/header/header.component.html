@@ -12,16 +12,32 @@
 
           <div class="show-notifications" *ngIf="showNotifications">
             <div class="notification-div">
-              <h3 class="text-center mb-3">Notifications</h3>
+              <h3 class="text-center mb-3" *ngIf="notifications.length !== 0">Notifications</h3>
               <ul>
                 <li *ngFor="let notification of notifications">
-                  <div class="d-flex align-items-start justify-content-between">
+                  <!-- ADMIN VIEW -->
+                  <div *ngIf="role === 'admin'" class="d-flex align-items-start justify-content-between">
                     <p class="mb-0">
-                      {{ notification.message }} <br> <small>({{ notification.createdAt | date:'short' }})</small>
+                      {{ notification.message }} <br>
+                      <small>({{ notification.createdAt | date:'short' }})</small>
                     </p>
                     <button (click)="markAsRead(notification.id)">Mark as Read</button>
                   </div>
+
+                  <!-- USER VIEW -->
+                  <div *ngIf="role === 'user'" class="d-flex align-items-start justify-content-between">
+                    <p class="mb-0">
+                      {{ notification.company.name }} invited you to join.
+                    </p>
+                    <div>
+                      <button (click)="respond(notification.id, true)">Accept</button>
+                      <button (click)="respond(notification.id, false)">Reject</button>
+                    </div>
+                  </div>
                 </li>
+                <h5 class="text-center" *ngIf="notifications.length === 0">
+                  You have no notifications.
+                </h5>
               </ul>
             </div>
           </div>

@@ -45,31 +45,5 @@
 </div>
 
 
-<div *ngIf="notifications.length > 0" class="notifications-panel">
-  <h3>Notifications</h3>
-  <ul>
-    <li *ngFor="let n of notifications">
-      {{ n.message }} <small>({{ n.createdAt | date:'short' }})</small>
-      <button (click)="markAsRead(n.id)">Mark as read</button>
-    </li>
-  </ul>
-</div>
-
-<div class="notification-wrapper">
-  <mat-icon aria-hidden="false" (click)="toggleNotifications()" aria-label="Example location icon" fontIcon="notifications"></mat-icon>
-  <div>
-    <span *ngIf="notifications.length > 0" class="badge">{{ notifications.length }}</span>
-  </div>
-</div>
-
-<div *ngIf="showNotifications">
-  <ul>
-    <li *ngFor="let notification of notifications">
-      {{ notification.message }}
-      <button (click)="markAsRead(notification.id)">Mark as Read</button>
-    </li>
-  </ul>
-</div>
-
 
 

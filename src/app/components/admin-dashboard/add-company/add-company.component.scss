@@ -1,0 +1,15 @@
+.dashboard-btn{
+    height: 35px;
+    border: none;
+    background-color: rgb(58, 136, 230);
+    color: white;
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    border-radius: 5px;
+    mat-icon{
+        font-size: 24px;
+    }
+}

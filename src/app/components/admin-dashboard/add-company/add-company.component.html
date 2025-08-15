@@ -1,4 +1,7 @@
-<button routerLink="/admin-dashboard">Go back to dashboard</button>
+<button class="dashboard-btn" routerLink="/admin-dashboard">
+    <mat-icon style="color: white;" aria-hidden="false" aria-label="Example location icon" fontIcon="arrow_back"></mat-icon>
+    Back
+</button>
 <h2>Add New Company</h2>
 <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
   <label>Company Name</label>

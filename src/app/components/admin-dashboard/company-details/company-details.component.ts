@@ -46,10 +46,12 @@ export class CompanyDetailsComponent {
   }
 
   removeUser(userId: number): void {
-    this.adminService.removeUserFromCompany(this.companyId, userId).subscribe({
-      next: () => this.getCompanyUsers(),
-      error: err => console.error('Error removing user', err)
-    });
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.adminService.removeUserFromCompany(this.companyId, userId).subscribe({
+        next: () => this.getCompanyUsers(),
+        error: err => console.error('Error removing user', err)
+      });
+    }
   }
 
   sendRequest() {

@@ -1,54 +1,55 @@
-<div class="">
-  <button class="dashboard-btn" routerLink="/admin-dashboard">
-    <mat-icon style="color: white;" aria-hidden="false" aria-label="Example location icon" fontIcon="arrow_back"></mat-icon>
-    Back
-  </button>
-  <h2>Company Details</h2>
+<button class="dashboard-btn" routerLink="/admin-dashboard">
+  <mat-icon style="color: white;" aria-hidden="false" aria-label="Example location icon" fontIcon="arrow_back"></mat-icon>
+  Back
+</button>
+<div class="details-container">
+
   <div *ngIf="company">
+    <h2>Company Details</h2>
+    <p><strong>Company ID:</strong> {{ company.id }}</p>
     <p><strong>Name:</strong> {{ company.name }}</p>
     <p><strong>Industry:</strong> {{ company.industry }}</p>
     <p><strong>Location:</strong> {{ company.location }}</p>
-  
-    <!-- Add other fields as needed -->
   </div>
-  
-  <div class="mt-4">
-    <label for="userId">Invite User to Company</label>
-    <input
-      type="number"
-      [(ngModel)]="userIdToInvite"
-      placeholder="Enter User ID"
-      class="border p-1 ml-2"
-    />
-    <button (click)="sendRequest()" class="ml-2 px-2 py-1 bg-blue-500 text-white rounded">
-      Send Request
-    </button>
-    <div class="mt-2 text-green-600" *ngIf="message">{{ message }}</div>
-  </div>
-  
-  
-  <h3>Assigned Users</h3>
-  
-  
-  <div class="table-cover">
 
-    <table *ngIf="users.length > 0">
-      <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Actions</th>
-      </tr>
-      <tr *ngFor="let user of users">
-        <td>{{user.id}}</td>
-        <td>{{user.username}}</td>
-        <td><button (click)="removeUser(user.id)">Remove</button></td>
-      </tr>
+  <div>
+    <div class="invite-container">
+      <label for="userId">Invite User to Company:</label>
+      <div class="input-div">
+        <input
+          type="number"
+          [(ngModel)]="userIdToInvite"
+          placeholder="Enter User ID"
+        />
+        <button (click)="sendRequest()" class="ml-2 px-2 py-1 bg-blue-500 text-white rounded">
+          Send
+        </button>
+      </div>
+      <div class="mt-2 text-green-600" *ngIf="message">{{ message }}</div>
+    </div>
     
-    </table>
+    
+    <h3>Assigned Users:</h3>
+    
+    
+    <div class="table-cover">
+  
+      <table *ngIf="users.length > 0">
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Actions</th>
+        </tr>
+        <tr *ngFor="let user of users">
+          <td>{{user.id}}</td>
+          <td>{{user.username}}</td>
+          <td><button (click)="removeUser(user.id)">Remove</button></td>
+        </tr>
+      
+      </table>
+    </div>
+    
+    <p *ngIf="users.length === 0">No users assigned yet.</p>
   </div>
-  
-  <p *ngIf="users.length === 0">No users assigned yet.</p>
-  
-  
 
 </div>  

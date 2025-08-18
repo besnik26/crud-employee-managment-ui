@@ -3,15 +3,22 @@
     Back
 </button>
 <h2>Add New Company</h2>
+
 <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
-  <label>Company Name</label>
-  <input formControlName="name" type="text" />
-
-  <label>Industry</label>
-  <input formControlName="industry" type="text" />
-
-  <label>Location</label>
-  <input formControlName="location" type="text" />
-
-  <button type="submit">Submit</button>
+  <div class="form-div">
+    <div class="input-div">
+      <label>Company Name</label>
+      <input formControlName="name" type="text" />
+    </div>
+    <div class="input-div">
+      <label>Industry</label>
+      <input formControlName="industry" type="text" />
+    </div>
+    <div class="input-div">   
+      <label>Location</label>
+      <input formControlName="location" type="text" />
+    </div>
+  
+    <button type="submit">Submit</button>
+  </div>
 </form>

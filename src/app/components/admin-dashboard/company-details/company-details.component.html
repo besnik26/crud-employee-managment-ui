@@ -13,6 +13,27 @@
   </div>
 
   <div>
+    <h2>Company News</h2>
+  
+    <!-- Create News Form -->
+    <div class="news-form">
+      <input type="text" [(ngModel)]="newNews.title" placeholder="Title" />
+      <textarea [(ngModel)]="newNews.content" placeholder="Content"></textarea>
+      <button (click)="publishNews()">Publish</button>
+    </div>
+  
+    <p *ngIf="message">{{ message }}</p>
+  
+    <!-- News List -->
+    <div *ngFor="let news of newsList" class="news-item">
+      <h3>{{ news.title }}</h3>
+      <p>{{ news.content }}</p>
+      <small>By {{ news.createdBy?.username }} on {{ news.createdAt | date:'short' }}</small>
+      <button (click)="deleteNews(news.id)">Delete</button>
+    </div>
+  </div>
+
+  <div>
     <div class="invite-container">
       <label for="userId">Invite User to Company:</label>
       <div class="input-div">

@@ -1,4 +1,3 @@
-// src/app/services/dashboard.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { UserService } from './user.service';

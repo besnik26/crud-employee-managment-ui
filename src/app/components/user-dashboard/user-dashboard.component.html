@@ -31,6 +31,14 @@
     </div>
 
   </div>
+  <div>
+    <h2>Company News</h2>
+    <div *ngFor="let news of newsList" class="news-item">
+      <h3>{{ news.title }}</h3>
+      <p>{{ news.content }}</p>
+      <small>By {{ news.createdBy?.username }} on {{ news.createdAt | date:'short' }}</small>
+    </div>
+  </div>
 
   <div class="img-div">
       <img src="../../../assets/visual-data.svg" alt="visual-data">

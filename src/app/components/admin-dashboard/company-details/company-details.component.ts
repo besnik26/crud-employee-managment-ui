@@ -76,6 +76,7 @@ export class CompanyDetailsComponent {
       }
     });
   }
+
   loadNews(): void {
     this.newsService.getCompanyNews(this.companyId).subscribe({
       next: data => this.newsList = data,
@@ -97,14 +98,14 @@ export class CompanyDetailsComponent {
   }
 
   deleteNews(newsId: number): void {
-  if (confirm('Are you sure you want to delete this news?')) {
-    this.newsService.deleteNews(newsId).subscribe({
-      next: () => {
-        this.newsList = this.newsList.filter(n => n.id !== newsId); // update UI 
-        this.message = 'News deleted successfully!';
-      },
-      error: err => console.error('Error deleting news', err)
-    });
+    if (confirm('Are you sure you want to delete this news?')) {
+      this.newsService.deleteNews(newsId).subscribe({
+        next: () => {
+          this.newsList = this.newsList.filter(n => n.id !== newsId); // update UI 
+          this.message = 'News deleted successfully!';
+        },
+        error: err => console.error('Error deleting news', err)
+      });
+    }
   }
-}
 }

@@ -12,17 +12,17 @@
     <p><strong>Location:</strong> {{ company.location }}</p>
   </div>
 
-  <div>
+  <div class="news-container">
     <h2>Company News</h2>
   
     <!-- Create News Form -->
     <div class="news-form">
-      <input type="text" [(ngModel)]="newNews.title" placeholder="Title" />
-      <textarea [(ngModel)]="newNews.content" placeholder="Content"></textarea>
+      <input id="title" type="text" [(ngModel)]="newNews.title" placeholder="Title" />
+      <textarea id="content" [(ngModel)]="newNews.content" placeholder="Content"></textarea>
       <button (click)="publishNews()">Publish</button>
     </div>
   
-    <p *ngIf="message">{{ message }}</p>
+    <!-- <p *ngIf="message">{{ message }}</p> -->
   
     <!-- News List -->
     <div *ngFor="let news of newsList" class="news-item">

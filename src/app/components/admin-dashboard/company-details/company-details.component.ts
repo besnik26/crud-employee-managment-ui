@@ -14,7 +14,8 @@ import { NewsService } from 'src/app/services/news.service';
 export class CompanyDetailsComponent {
   companyId!: number;
   userIdToInvite: number = 0;
-  message = '';
+  newsMessage = '';
+  joinRequestMessage = '';
   company: any;
   users: any[] = [];
   userIdToAssign!: number;
@@ -64,13 +65,13 @@ export class CompanyDetailsComponent {
   sendRequest() {
     this.joinRequestService.sendJoinRequest(this.userIdToInvite, this.companyId).subscribe({
       next: () => {
-        this.message = 'Join request sent successfully.';
+        this.joinRequestMessage = 'Join request sent successfully.';
       },
       error: (err) => {
         if (err.status === 400 && err.error?.error?.includes("already exists")) {
-          this.message = "This user already has a pending request.";
+          this.joinRequestMessage = "This user already has a pending request.";
         } else {
-          this.message = "Error sending request.";
+          this.joinRequestMessage = "Error sending request.";
         }
         console.error(err);
       }
@@ -89,7 +90,7 @@ export class CompanyDetailsComponent {
 
     this.newsService.createNews(this.companyId, this.newNews).subscribe({
       next: () => {
-        this.message = 'News published successfully!';
+        this.newsMessage = 'News published successfully!';
         this.newNews = { title: '', content: '' };
         this.loadNews();
       },
@@ -102,7 +103,7 @@ export class CompanyDetailsComponent {
       this.newsService.deleteNews(newsId).subscribe({
         next: () => {
           this.newsList = this.newsList.filter(n => n.id !== newsId); // update UI 
-          this.message = 'News deleted successfully!';
+          this.newsMessage = 'News deleted successfully!';
         },
         error: err => console.error('Error deleting news', err)
       });

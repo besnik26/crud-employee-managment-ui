@@ -44,9 +44,9 @@ export class UserContextService {
       });
     } 
     else if (role === 'user') {
-      this.joinRequestService.getPendingRequests().subscribe({
-        next: requests => this.notificationsSubject.next(requests),
-        error: err => console.error('Error loading join requests', err)
+      this.adminService.getNotifications().subscribe({
+        next: data => this.notificationsSubject.next(data),
+        error: err => console.error('Error loading user notifications', err)
       });
     }
   }

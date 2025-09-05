@@ -23,7 +23,7 @@ export class NewsService {
 
   createNews(companyId: number, news: { title: string; content: string }): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/${companyId}`, news, {
-      headers: this.getAuthHeaders()
+      headers: this.getAuthHeaders().set('Content-Type', 'application/json')
     });
   }
 

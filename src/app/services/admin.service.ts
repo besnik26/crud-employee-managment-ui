@@ -60,8 +60,6 @@ export class AdminService {
   deleteCompany(companyId: number): Observable<string> {
     return this.http.delete(`${this.baseUrl}/${companyId}`, { responseType: 'text' });
   }
-
-
   
   removeUserFromCompany(companyId: number, userId: number) {
     return this.http.put(`${this.baseUrl}/${companyId}/remove-user/${userId}`, {}, {
@@ -81,11 +79,5 @@ export class AdminService {
       headers: this.getAuthHeaders()
     });
   }
-
-
-
-
-
-
 
 }

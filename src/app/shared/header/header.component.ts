@@ -23,12 +23,7 @@ export class HeaderComponent  implements OnInit{
   ngOnInit(): void {
     this.userContext.role$.subscribe(role => {
       this.role = role || '';
-
-      if (this.role === 'admin') {
-        this.userContext.notifications$.subscribe(n => this.notifications = n);
-      } else if (this.role === 'user') {
-        this.dashboardService.joinRequests$.subscribe(r => this.notifications = r);
-      }
+      this.userContext.notifications$.subscribe(n => this.notifications = n);
     });
   }
 
@@ -44,7 +39,7 @@ export class HeaderComponent  implements OnInit{
 
   respond(requestId: number, accepted: boolean): void {
     if (this.role === 'user') {
-      this.dashboardService.respondToJoinRequest(requestId, accepted);
+      this.userContext.respondToJoinRequest(requestId, accepted);
     }
   }
 

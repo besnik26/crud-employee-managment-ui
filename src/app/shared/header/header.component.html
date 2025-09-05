@@ -15,23 +15,24 @@
               <h3 class="text-center mb-3" *ngIf="notifications.length !== 0">Notifications</h3>
               <ul>
                 <li *ngFor="let notification of notifications">
-                  <!-- ADMIN VIEW -->
-                  <div *ngIf="role === 'admin'" class="d-flex align-items-start justify-content-between">
-                    <p class="mb-0">
-                      {{ notification.message }} <br>
-                      <small>({{ notification.createdAt | date:'short' }})</small>
-                    </p>
+                  <!-- NEWS -->
+                  <div *ngIf="notification.type === 'NEWS'" class="d-flex justify-content-between">
+                    <p>{{ notification.message }}</p>
                     <button (click)="markAsRead(notification.id)">Mark as Read</button>
                   </div>
 
-                  <!-- USER VIEW -->
-                  <div *ngIf="role === 'user'" class="d-flex align-items-start justify-content-between">
-                    <p class="mb-0">
-                      {{ notification.company.name }} invited you to join.
-                    </p>
+                  <!-- REQUEST (admin sees response) -->
+                  <div *ngIf="notification.type === 'REQUEST'">
+                    <p>{{ notification.message }}</p>
+                    <button (click)="markAsRead(notification.id)">Mark as Read</button>
+                  </div>
+
+                  <!-- JOIN_REQUEST (user gets invite) -->
+                  <div *ngIf="notification.type === 'JOIN_REQUEST'" class="d-flex justify-content-between">
+                    <p>{{ notification.message }}</p>
                     <div>
-                      <button (click)="respond(notification.id, true)">Accept</button>
-                      <button (click)="respond(notification.id, false)">Reject</button>
+                      <button (click)="respond(notification.relatedId, true)">Accept</button>
+                      <button (click)="respond(notification.relatedId, false)">Reject</button>
                     </div>
                   </div>
                 </li>

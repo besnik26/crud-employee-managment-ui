@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class EditCompanyComponent implements OnInit{
     private route: ActivatedRoute,
     private adminService: AdminService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toaster:ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +39,8 @@ export class EditCompanyComponent implements OnInit{
 
     this.adminService.updateCompany(this.companyId, this.form.value).subscribe(() => {
       this.router.navigate(['/admin-dashboard']);
+      this.toaster.success('Company info edited successfully!')
     });
+
   }
 }

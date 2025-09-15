@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { NgModel } from '@angular/forms';
 import { JoinRequestService } from 'src/app/services/join-request.service';
 import { NewsService } from 'src/app/services/news.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-company-details',
@@ -29,7 +30,8 @@ export class CompanyDetailsComponent {
     private route: ActivatedRoute, 
     private adminService: AdminService, 
     private joinRequestService: JoinRequestService,
-    private newsService:NewsService
+    private newsService:NewsService,
+    private toaster:ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -42,21 +44,30 @@ export class CompanyDetailsComponent {
   getCompanyInfo(): void {
     this.adminService.getCompanyById(this.companyId).subscribe(
       data => this.company = data,
-      err => console.error('Error fetching company', err)
+      err => {
+        console.error('Error fetching company', err)
+        this.toaster.error('Error fetching company')
+      }
     );
   }
 
   getCompanyUsers(): void {
     this.adminService.getCompanyUsers(this.companyId).subscribe(
       data => this.users = data,
-      err => console.error('Error fetching users', err)
+      err => {
+        console.error('Error fetching users', err)
+        this.toaster.error('Error fetching users')
+      }
     );
   }
 
   removeUser(userId: number): void {
     if (confirm('Are you sure you want to delete this user?')) {
       this.adminService.removeUserFromCompany(this.companyId, userId).subscribe({
-        next: () => this.getCompanyUsers(),
+        next: () => {
+          this.getCompanyUsers()
+          this.toaster.success('User removed successfully!');
+        },
         error: err => console.error('Error removing user', err)
       });
     }
@@ -66,12 +77,15 @@ export class CompanyDetailsComponent {
     this.joinRequestService.sendJoinRequest(this.userIdToInvite, this.companyId).subscribe({
       next: () => {
         this.joinRequestMessage = 'Join request sent successfully.';
+        this.toaster.info('Join request sent successfully.')
       },
       error: (err) => {
-        if (err.status === 400 && err.error?.error?.includes("already exists")) {
-          this.joinRequestMessage = "This user already has a pending request.";
+        if (err.status === 400 && err.error?.message?.includes("24 hours")) {
+          this.joinRequestMessage = "You can only send a new invite every 24 hours.";
+          this.toaster.error('You can only send a new invite every 24 hours.";')
         } else {
           this.joinRequestMessage = "Error sending request.";
+          this.toaster.error('Error sending request.')
         }
         console.error(err);
       }
@@ -81,7 +95,10 @@ export class CompanyDetailsComponent {
   loadNews(): void {
     this.newsService.getCompanyNews(this.companyId).subscribe({
       next: data => this.newsList = data,
-      error: err => console.error('Error fetching news', err)
+      error: err => {
+        console.error('Error fetching news', err)
+        this.toaster.error('Error fetching news')
+      }
     });
   }
 
@@ -91,10 +108,14 @@ export class CompanyDetailsComponent {
     this.newsService.createNews(this.companyId, this.newNews).subscribe({
       next: () => {
         this.newsMessage = 'News published successfully!';
+        this.toaster.success('News published successfully!')
         this.newNews = { title: '', content: '' };
         this.loadNews();
       },
-      error: err => console.error('Error publishing news', err)
+      error: err =>{ 
+        console.error('Error publishing news', err)
+        this.toaster.error('Error publishing news')
+      }
     });
   }
 
@@ -104,8 +125,12 @@ export class CompanyDetailsComponent {
         next: () => {
           this.newsList = this.newsList.filter(n => n.id !== newsId); // update UI 
           this.newsMessage = 'News deleted successfully!';
+          this.toaster.info('News deleted successfully!')
         },
-        error: err => console.error('Error deleting news', err)
+        error: err => {
+          console.error('Error deleting news', err)
+          this.toaster.error('Error deleting news')
+        }
       });
     }
   }

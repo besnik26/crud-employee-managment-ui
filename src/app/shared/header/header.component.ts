@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserContextService } from 'src/app/services/user-context.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -17,7 +18,8 @@ export class HeaderComponent  implements OnInit{
     public authService: AuthService,
     private router: Router,
     private userContext: UserContextService,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private toaster:ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -32,9 +34,7 @@ export class HeaderComponent  implements OnInit{
   }
 
   markAsRead(notificationId: number): void {
-    if (this.role === 'admin') {
       this.userContext.markAsRead(notificationId);
-    }
   }
 
   respond(requestId: number, accepted: boolean): void {
@@ -46,5 +46,6 @@ export class HeaderComponent  implements OnInit{
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
+    this.toaster.info('Logged out successfully!')
   }
 }

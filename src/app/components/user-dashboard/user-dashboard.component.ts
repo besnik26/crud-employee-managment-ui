@@ -25,7 +25,6 @@ export class UserDashboardComponent implements OnInit{
       }
     });   
     this.dashboardService.companyUsers$.subscribe(users => this.companyUsers = users);
-    this.dashboardService.joinRequests$.subscribe(requests => this.joinRequests = requests);
 
     this.dashboardService.loadDashboard();
   }
@@ -37,7 +36,5 @@ export class UserDashboardComponent implements OnInit{
     });
   }
   
-  respond(requestId: number, accepted: boolean): void {
-    this.dashboardService.respondToJoinRequest(requestId, accepted);
-  }
+  
 }

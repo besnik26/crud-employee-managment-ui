@@ -16,13 +16,11 @@ export class DashboardService {
 
   constructor(
     private userService: UserService,
-    private joinRequestService: JoinRequestService
   ) {}
 
   loadDashboard(): void {
     this.loadUser();
     this.loadCompanyUsers();
-    this.loadJoinRequests();
   }
 
   loadUser(): void {
@@ -46,19 +44,4 @@ export class DashboardService {
     });
   }
 
-  loadJoinRequests(): void {
-    this.joinRequestService.getPendingRequests().subscribe({
-      next: requests => this.joinRequestsSubject.next(requests),
-      error: err => console.error('Error loading join requests', err)
-    });
-  }
-
-  respondToJoinRequest(requestId: number, accepted: boolean): void {
-    this.joinRequestService.respondToRequest(requestId, accepted).subscribe({
-      next: () => {
-        this.loadDashboard();
-      },
-      error: err => console.error('Error responding to join request', err)
-    });
-  }
 }

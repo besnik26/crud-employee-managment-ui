@@ -27,7 +27,7 @@ import { AddCompanyComponent } from './components/admin-dashboard/add-company/ad
 import { EditCompanyComponent } from './components/admin-dashboard/edit-company/edit-company.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { CompanyDetailsComponent } from './components/admin-dashboard/company-details/company-details.component';
-
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,11 @@ import { CompanyDetailsComponent } from './components/admin-dashboard/company-de
     MatButtonModule,
     ReactiveFormsModule,
     MatTableModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot({
+      preventDuplicates:true,
+      timeOut:2500
+    })
   ],
   providers: [
     {

@@ -22,7 +22,7 @@
       <button (click)="publishNews()">Publish</button>
     </div>
   
-    <!-- <p *ngIf="message">{{ message }}</p> -->
+    <p *ngIf="newsMessage">{{ newsMessage }}</p>
   
     <!-- News List -->
     <div *ngFor="let news of newsList" class="news-item">
@@ -50,6 +50,8 @@
           Send
         </button>
       </div>
+      <p *ngIf="joinRequestMessage">{{ joinRequestMessage }}</p>
+
     </div>
     
     

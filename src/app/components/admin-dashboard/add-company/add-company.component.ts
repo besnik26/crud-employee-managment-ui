@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from 'src/app/services/admin.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-company',
@@ -14,7 +15,8 @@ export class AddCompanyComponent {
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
-    private router: Router
+    private router: Router,
+    private toaster:ToastrService
   ) {
     this.companyForm = this.fb.group({
       name: ['', Validators.required],
@@ -26,8 +28,14 @@ export class AddCompanyComponent {
   onSubmit() {
     if (this.companyForm.valid) {
       this.adminService.addCompany(this.companyForm.value).subscribe({
-        next: () => this.router.navigate(['/admin-dashboard']),
-        error: err => alert('Failed to add company: ' + err.message)
+        next: () => {
+          this.router.navigate(['/admin-dashboard'])
+          this.toaster.success('Company added successfully!')
+        },
+
+        error: err => {
+          this.toaster.error('Failed to add company!')
+        }
       });
     }
   }

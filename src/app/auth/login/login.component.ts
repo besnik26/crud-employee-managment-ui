@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { UserContextService } from 'src/app/services/user-context.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,7 +13,13 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private userContext: UserContextService) {
+  constructor(
+    private fb: FormBuilder, 
+    private authService: AuthService, 
+    private router: Router, 
+    private userContext: UserContextService,
+    private toaster:ToastrService
+  ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -28,12 +35,16 @@ export class LoginComponent {
           this.userContext.setRoleFromToken();
           if (decodedToken.role === 'ROLE_ADMIN') {
             this.router.navigate(['/admin-dashboard']);
+            this.toaster.success('Login successfull!')
           } else {
             this.router.navigate(['/user-dashboard']);
+            this.toaster.success('Login successfull!')
+
           }
         },
         error: () => {
           this.errorMessage = 'Invalid username or password';
+          this.toaster.error('Invalid username or password');
         }
       });
     }

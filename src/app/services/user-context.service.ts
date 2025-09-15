@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { AdminService } from './admin.service';
 import { JoinRequestService } from './join-request.service';
+import { DashboardService } from './dashboard.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserContextService {
@@ -11,7 +12,7 @@ export class UserContextService {
   role$ = this.roleSubject.asObservable();
   notifications$ = this.notificationsSubject.asObservable();
 
-  constructor(private adminService: AdminService, private joinRequestService: JoinRequestService) {
+  constructor(private adminService: AdminService, private joinRequestService: JoinRequestService, private dashboardService:DashboardService) {
     this.refreshNotifications(); // load if admin
       setInterval(() => this.refreshNotifications(), 60000);
 
@@ -52,25 +53,27 @@ export class UserContextService {
   }
 
   markAsRead(notificationId: number): void {
-    if (this.roleSubject.value === 'admin') {
-      this.adminService.markNotificationAsRead(notificationId).subscribe({
-        next: () => {
-          const updated = this.notificationsSubject.value.filter(n => n.id !== notificationId);
-          this.notificationsSubject.next(updated);
-        },
-        error: err => console.error('Error marking notification as read', err)
-      });
-    }
-  }
+  this.adminService.markNotificationAsRead(notificationId).subscribe({
+    next: () => {
+      const updated = this.notificationsSubject.value.filter(n => n.id !== notificationId);
+      this.notificationsSubject.next(updated);
+    },
+    error: err => console.error('Error marking notification as read', err)
+  });
+}
 
   respondToJoinRequest(requestId: number, accepted: boolean): void {
-    if (this.roleSubject.value === 'user') {
-      this.joinRequestService.respondToRequest(requestId, accepted).subscribe({
-        next: () => this.refreshNotifications(),
-        error: err => console.error('Error responding to join request', err)
-      });
-    }
+  if (this.roleSubject.value === 'user') {
+    this.joinRequestService.respondToRequest(requestId, accepted).subscribe({
+      next: () => {
+        console.log("Join request response successful");
+        this.dashboardService.loadDashboard();
+        this.refreshNotifications();
+      },
+      error: err => console.error("Error responding to join request", err)
+    });
   }
+}
 
   clear(): void {
     this.roleSubject.next(null);

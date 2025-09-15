@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -13,7 +14,12 @@ export class SignupComponent {
   
   signupForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder, 
+    private authService: AuthService, 
+    private router: Router,
+    private toaster:ToastrService
+  ) {
     this.signupForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -25,12 +31,14 @@ export class SignupComponent {
     if (this.signupForm.valid) {
       this.authService.signup(this.signupForm.value).subscribe({
         next: (res) => {
-          alert(res.message); 
           this.router.navigate(['/login']);
+          this.toaster.success('Please write your account info, so you can log in!',res.message,{
+            timeOut:5000
+          })
         },
         error: (err) => {
           console.error(err);
-          alert('Signup failed. Please try again.');
+          this.toaster.error('Signup failed. Please try again.');
         }
       });
     }

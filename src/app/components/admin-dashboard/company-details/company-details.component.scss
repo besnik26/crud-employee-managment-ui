@@ -116,6 +116,9 @@ button{
     mat-icon{
         font-size: 24px;
     }
+    &:hover{
+        background-color: rgb(36, 99, 179);
+    }
 }
 .table-cover{
     padding: 10px;
@@ -123,6 +126,7 @@ button{
     border-radius: 10px;
     max-width: 325px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     button{
         background-color: red;

@@ -123,3 +123,12 @@
     }
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .company-container{
+    flex-wrap: wrap;
+  }
+  .title{
+    text-align: start!important;
+  }
+}

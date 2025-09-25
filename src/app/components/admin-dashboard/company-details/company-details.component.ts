@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,8 @@ import { NgModel } from '@angular/forms';
 import { JoinRequestService } from 'src/app/services/join-request.service';
 import { NewsService } from 'src/app/services/news.service';
 import { ToastrService } from 'ngx-toastr';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-company-details',
@@ -21,7 +23,11 @@ export class CompanyDetailsComponent {
   users: any[] = [];
   userIdToAssign!: number;
   newsList: any[] = [];
+  displayedColumns: string[] = ['id', 'username', 'actions'];
+  dataSource:any;
 
+  @ViewChild(MatPaginator) paginator! : MatPaginator;
+ 
   // form model
   newNews = { title: '', content: '' };
 
@@ -52,13 +58,21 @@ export class CompanyDetailsComponent {
   }
 
   getCompanyUsers(): void {
-    this.adminService.getCompanyUsers(this.companyId).subscribe(
-      data => this.users = data,
-      err => {
-        console.error('Error fetching users', err)
-        this.toaster.error('Error fetching users')
+    this.adminService.getCompanyUsers(this.companyId).subscribe({
+      next:(data) =>{
+        this.users = data;
+        this.dataSource =  new MatTableDataSource<any>(this.users)
+      },
+      error:(err)=>{
+        console.error('Error fetching users', err);
+        this.toaster.error('Error fetching users');
+      },
+      complete:() =>{
+        console.log('Users fetched successfully');
+        this.dataSource.paginator = this.paginator;
+        console.log('Complete:' + this.dataSource.paginator);
       }
-    );
+    });
   }
 
   removeUser(userId: number): void {

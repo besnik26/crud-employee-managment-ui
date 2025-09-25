@@ -28,6 +28,7 @@ import { EditCompanyComponent } from './components/admin-dashboard/edit-company/
 import { AuthInterceptor } from './auth.interceptor';
 import { CompanyDetailsComponent } from './components/admin-dashboard/company-details/company-details.component';
 import { ToastrModule } from 'ngx-toastr';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatCheckboxModule,
     MatDividerModule,
     MatButtonModule,
+    MatPaginatorModule,
+    MatTableModule,
     ReactiveFormsModule,
     MatTableModule,
     FormsModule,

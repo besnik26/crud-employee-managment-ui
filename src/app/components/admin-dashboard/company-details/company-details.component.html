@@ -60,19 +60,35 @@
     
     <div class="table-cover">
   
-      <table *ngIf="users.length > 0">
-        <tr>
-          <th>ID</th>
-          <th>Username</th>
-          <th>Actions</th>
-        </tr>
-        <tr *ngFor="let user of users">
-          <td>{{user.id}}</td>
-          <td>{{user.username}}</td>
-          <td><button (click)="removeUser(user.id)">Remove</button></td>
-        </tr>
-      
+
+
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let user"> {{user.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef> Username </th>
+          <td mat-cell *matCellDef="let user"> {{user.username}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let user">
+            <button (click)="removeUser(user.id)">Remove</button> 
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+      </mat-paginator>
     </div>
     
     <p *ngIf="users.length === 0">No users assigned yet.</p>

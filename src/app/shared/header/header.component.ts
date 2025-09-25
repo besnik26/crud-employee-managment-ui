@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserContextService } from 'src/app/services/user-context.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
@@ -19,7 +19,8 @@ export class HeaderComponent  implements OnInit{
     private router: Router,
     private userContext: UserContextService,
     private dashboardService: DashboardService,
-    private toaster:ToastrService
+    private toaster:ToastrService,
+    private elementRef:ElementRef
   ) {}
 
   ngOnInit(): void {
@@ -47,5 +48,15 @@ export class HeaderComponent  implements OnInit{
     this.authService.logout();
     this.router.navigate(['/login']);
     this.toaster.info('Logged out successfully!')
+  }
+
+  @HostListener('document:click', ['$event'])
+  ClickOut(event: MouseEvent) {
+    const isClickedOutside = !this.elementRef.nativeElement.contains(
+      event.target as Node
+    );
+    if (isClickedOutside) {
+      this.showNotifications = false;
+    }
   }
 }

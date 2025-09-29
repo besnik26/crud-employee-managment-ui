@@ -1,5 +1,8 @@
 <p>
   <mat-toolbar color="primary" class="navbar">
+    <div (click)="toggleSidePanel()">
+      <mat-icon aria-hidden="false" aria-label="Example menus icon" fontIcon="menu"></mat-icon>
+    </div>
     <span class="monoton-regular">EMS</span>
     <div style="width: auto;" class="d-flex align-items-center" *ngIf="authService.isLoggedIn()">
       <div style="position: relative;">

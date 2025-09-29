@@ -23,7 +23,7 @@ export class CompanyDetailsComponent {
   users: any[] = [];
   userIdToAssign!: number;
   newsList: any[] = [];
-  displayedColumns: string[] = ['id', 'username', 'actions'];
+  displayedColumns: string[] = ['id', 'username','email', 'phoneNumber', 'actions'];
   dataSource:any;
 
   @ViewChild(MatPaginator) paginator! : MatPaginator;

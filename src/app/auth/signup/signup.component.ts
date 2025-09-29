@@ -22,6 +22,8 @@ export class SignupComponent {
   ) {
     this.signupForm = this.fb.group({
       username: ['', Validators.required],
+      email:['', [Validators.required, Validators.email]],
+      phoneNumber:['', [Validators.required, Validators.pattern('^\\+?[0-9]{10,15}$')]],
       password: ['', Validators.required],
       role: ['ROLE_USER', Validators.required]
     });
@@ -32,7 +34,7 @@ export class SignupComponent {
       this.authService.signup(this.signupForm.value).subscribe({
         next: (res) => {
           this.router.navigate(['/login']);
-          this.toaster.success('Please write your account info, so you can log in!',res.message,{
+          this.toaster.success('Please log in with your new account!',res.message,{
             timeOut:5000
           })
         },

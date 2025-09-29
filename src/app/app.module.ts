@@ -29,6 +29,7 @@ import { AuthInterceptor } from './auth.interceptor';
 import { CompanyDetailsComponent } from './components/admin-dashboard/company-details/company-details.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { SidePanelComponent } from './shared/side-panel/side-panel.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     UserDashboardComponent,
     AddCompanyComponent,
     EditCompanyComponent,
-    CompanyDetailsComponent
+    CompanyDetailsComponent,
+    SidePanelComponent
   ],
   imports: [
     BrowserModule,

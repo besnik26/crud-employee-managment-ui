@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserContextService } from 'src/app/services/user-context.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { ToastrService } from 'ngx-toastr';
+import { PanelService } from 'src/app/services/panel.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -20,7 +21,8 @@ export class HeaderComponent  implements OnInit{
     private userContext: UserContextService,
     private dashboardService: DashboardService,
     private toaster:ToastrService,
-    private elementRef:ElementRef
+    private elementRef:ElementRef,
+    private panelService:PanelService
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +36,10 @@ export class HeaderComponent  implements OnInit{
     this.showNotifications = !this.showNotifications;
   }
 
+  toggleSidePanel(): void{
+    this.panelService.toggleSidePanel();
+  }
+  
   markAsRead(notificationId: number): void {
       this.userContext.markAsRead(notificationId);
   }

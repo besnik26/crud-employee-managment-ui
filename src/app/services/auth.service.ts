@@ -13,7 +13,7 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/login`, credentials);
   }
 
-  signup(data: { username: string; password: string; role: string }): Observable<any> {
+  signup(data: { username: string; email:string; phoneNumber:string; password: string; role: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/signup`, data);
   }
 

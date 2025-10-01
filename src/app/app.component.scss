@@ -1,6 +1,11 @@
 .custom-container{
     // padding: 0 32px;
     display: flex;
+    width: 100%;
+    .dashboard{
+        width: 100%;
+        padding: 10px 32px;
+    }
 }
 
 @media only screen and (max-width: 760px) {

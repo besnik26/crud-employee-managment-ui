@@ -1,7 +1,51 @@
 <div class="main" *ngIf="!sidePanelOpen">
-    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+    <div class="panel-container">
+        <div class="panel-route-container">
+            <div class="route-container">
+                <div class="icon-div">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+                </div>
+            </div>
+            <div class="route-container">
+                <div class="icon-div">
+                    <mat-icon aria-hidden="false" aria-label="Example group icon" fontIcon="group"></mat-icon>
+                </div>
+            </div>
+        </div>
+        <div class="route-container">
+            <div class="icon-div">
+                <mat-icon aria-hidden="false" aria-label="Example exit icon" fontIcon="exit_to_app"></mat-icon>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <div class="main-2" *ngIf="sidePanelOpen">
-    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+    <div class="panel-container">
+        <div class="panel-route-container">
+            <div class="route-container">
+                <div class="icon-div">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+                </div>
+                <p class="m-0">Home</p>
+
+            </div>
+            <div class="route-container">
+                <div class="icon-div">
+                    <mat-icon aria-hidden="false" aria-label="Example group icon" fontIcon="group"></mat-icon>
+                </div>
+                <p class="m-0">Members</p>
+            </div>        
+        </div>
+        <div class="panel-route-container">
+
+            <div class="route-container"> 
+                <div class="icon-div">
+                    <mat-icon aria-hidden="false" aria-label="Example exit icon" fontIcon="exit_to_app"></mat-icon>
+                </div>
+                <p class="m-0">Sign out</p>
+            </div>
+        </div>
+    </div>
 </div>

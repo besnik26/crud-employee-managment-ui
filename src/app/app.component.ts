@@ -14,7 +14,7 @@ export class AppComponent {
 
   showHeader = true;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, public authService: AuthService) {
 
     if (!this.authService.isLoggedIn()) {
       this.authService.logout();

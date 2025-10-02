@@ -1,12 +1,12 @@
 <p class="m-0">
   <mat-toolbar color="primary" class="navbar">
-    <div (click)="toggleSidePanel()">
+    <div *ngIf="authService.isLoggedIn()" (click)="toggleSidePanel()">
       <mat-icon aria-hidden="false" aria-label="Example menus icon" fontIcon="menu"></mat-icon>
     </div>
     <span class="monoton-regular">EMS</span>
     <div style="width: auto;" class="d-flex align-items-center" *ngIf="authService.isLoggedIn()">
       <div style="position: relative;">
-        <div class="notification-wrapper mr-5" (click)="toggleNotifications()">
+        <div class="notification-wrapper mr-0" (click)="toggleNotifications()">
             <mat-icon aria-hidden="false"  aria-label="Example location icon" fontIcon="notifications"></mat-icon>
             <div>
               <span *ngIf="notifications.length > 0" class="badge">{{ notifications.length }}</span>
@@ -47,10 +47,6 @@
           </div>
       </div>
       
-
-      <button (click)="logout()">
-        <mat-icon aria-hidden="false" aria-label="Example location icon" fontIcon="logout"></mat-icon>
-      </button>
     </div>
   </mat-toolbar>
 </p>

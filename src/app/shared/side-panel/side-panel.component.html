@@ -6,15 +6,42 @@
                     <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
                 </div>
             </div>
-            <div class="route-container">
+            <div class="route-container news-hover">
                 <div class="icon-div">
                     <mat-icon aria-hidden="false" aria-label="Example group icon" fontIcon="group"></mat-icon>
                 </div>
+                <div class="news-dropdown-absolute">
+                    <div *ngFor="let company of companies" class="company">
+                        <ul>
+                            <li>
+                                {{ company.name + ' Members'}}
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="route-container news-hover">
+                <div class="icon-div">
+                    <mat-icon aria-hidden="false" aria-label="Example news icon" fontIcon="post_add"></mat-icon>
+                </div>
+                <div class="news-dropdown-absolute">
+                    <div *ngFor="let company of companies" class="company">
+                        <ul>
+                            <li>
+                                {{ company.name + ' News'}}
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
             </div>
         </div>
-        <div class="route-container" (click)="logout()">
-            <div class="icon-div">
-                <mat-icon aria-hidden="false" aria-label="Example exit icon" fontIcon="exit_to_app"></mat-icon>
+        <div class="panel-route-container">
+            <div class="route-container" (click)="logout()">
+                <div class="icon-div">
+                    <mat-icon aria-hidden="false" aria-label="Example exit icon" fontIcon="exit_to_app"></mat-icon>
+                </div>
             </div>
         </div>
     </div>
@@ -29,14 +56,44 @@
                     <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
                 </div>
                 <p class="m-0">Home</p>
-
             </div>
-            <div class="route-container">
-                <div class="icon-div">
-                    <mat-icon aria-hidden="false" aria-label="Example group icon" fontIcon="group"></mat-icon>
+            <div class="route-container caret-route-container" (click)="toggleMemberDropdown()">
+                <div class="d-flex align-items-center">
+                    <div class="icon-div">
+                        <mat-icon aria-hidden= "false" aria-label="Example group icon" fontIcon="group"></mat-icon>
+                    </div>
+                    <p class="m-0">Members</p>
                 </div>
-                <p class="m-0">Members</p>
-            </div>        
+                <mat-icon aria-hidden="false" [ngClass]="{'caret-transformed': memberDropdownOpen}" class="caret" aria-label="Example news icon" fontIcon="keyboard_arrow_down"></mat-icon>
+            </div>   
+            <div [ngClass]="{'dropdown-list-active': memberDropdownOpen}"class="dropdown-list">
+                <div>
+                    <ul>
+                        <li *ngFor="let company of companies" class="company">
+                            {{ company.name + ' Members'}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="route-container caret-route-container" (click)="toggleNewsDropdown()">
+                <div class="d-flex align-items-center">
+                    <div class="icon-div">
+                        <mat-icon aria-hidden="false" aria-label="Example news icon" fontIcon="post_add"></mat-icon>
+                    </div>
+                    <p class="m-0">News</p>
+                </div>
+                <mat-icon aria-hidden="false" [ngClass]="{'caret-transformed': newsDropdownOpen}" class="caret" aria-label="Example news icon" fontIcon="keyboard_arrow_down"></mat-icon>
+            </div>
+            <div [ngClass]="{'dropdown-list-active': newsDropdownOpen}" class="dropdown-list">
+                <div>
+                    <ul>
+                        <li *ngFor="let company of companies" class="company">
+                            {{ company.name + ' News'}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="panel-route-container">
 

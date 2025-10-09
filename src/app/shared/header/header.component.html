@@ -1,6 +1,6 @@
 <p class="m-0">
   <mat-toolbar color="primary" class="navbar">
-    <div *ngIf="authService.isLoggedIn()" (click)="toggleSidePanel()">
+    <div *ngIf="authService.isLoggedIn()" (click)="toggleSidePanel()" class="icon-div">
       <mat-icon aria-hidden="false" aria-label="Example menus icon" fontIcon="menu"></mat-icon>
     </div>
     <span class="monoton-regular">EMS</span>

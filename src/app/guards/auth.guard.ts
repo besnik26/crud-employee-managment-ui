@@ -12,8 +12,7 @@ import {
 })
 export class authGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
-
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  private checkAccess(route: ActivatedRouteSnapshot): boolean {
     const expectedRole = route.data['role'];
     const token = localStorage.getItem('token');
 
@@ -22,24 +21,40 @@ export class authGuard implements CanActivate {
       return false;
     }
 
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    const userRole = payload.role;
-    const exp = payload.exp;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const userRole = payload.role;
+      const exp = payload.exp;
 
-    const isExpired = Math.floor(Date.now() / 1000) > exp;
-    if (isExpired) {
+      const isExpired = Math.floor(Date.now() / 1000) > exp;
+      if (isExpired) {
+        this.authService.logout();
+        this.router.navigate(['/login']);
+        return false;
+      }
+
+      if (expectedRole && userRole !== expectedRole) {
+        this.router.navigate([
+          userRole === 'ROLE_ADMIN' ? '/admin-dashboard' : '/user-dashboard'
+        ]);
+        return false;
+      }
+
+      return true;
+    } catch (e) {
+      // Invalid token
       this.authService.logout();
       this.router.navigate(['/login']);
       return false;
     }
-
-    if (expectedRole && userRole !== expectedRole) {
-      this.router.navigate([
-        userRole === 'ROLE_ADMIN' ? '/admin-dashboard' : '/user-dashboard'
-      ]);
-      return false;
-    }
-
-    return true;
   }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    return this.checkAccess(route);
+  }
+
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    return this.checkAccess(route);
+  }
+  
 }

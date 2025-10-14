@@ -1,7 +1,7 @@
 <div class="main" *ngIf="!sidePanelOpen">
     <div class="panel-container">
         <div class="panel-route-container">
-            <div class="route-container">
+            <div class="route-container" routerLink="/admin-dashboard">
                 <div class="icon-div">
                     <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
                 </div>
@@ -26,7 +26,7 @@
                     <mat-icon aria-hidden="false" aria-label="Example news icon" fontIcon="post_add"></mat-icon>
                 </div>
                 <div class="news-dropdown-absolute">
-                    <div *ngFor="let company of companies" class="company">
+                    <div *ngFor="let company of companies" class="company" (click)="navigateTo('/news/',company.id)" >
                         <ul>
                             <li>
                                 {{ company.name + ' News'}}
@@ -51,7 +51,7 @@
 <div class="main-2" *ngIf="sidePanelOpen">
     <div class="panel-container">
         <div class="panel-route-container">
-            <div class="route-container">
+            <div class="route-container" routerLink="/admin-dashboard">
                 <div class="icon-div">
                     <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
                 </div>

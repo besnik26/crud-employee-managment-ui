@@ -30,6 +30,8 @@ import { CompanyDetailsComponent } from './components/admin-dashboard/company-de
 import { ToastrModule } from 'ngx-toastr';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SidePanelComponent } from './shared/side-panel/side-panel.component';
+import { NewsComponent } from './components/admin-dashboard/news/news.component';
+import { CdkVirtualScrollableElement } from "@angular/cdk/scrolling";
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { SidePanelComponent } from './shared/side-panel/side-panel.component';
     AddCompanyComponent,
     EditCompanyComponent,
     CompanyDetailsComponent,
-    SidePanelComponent
+    SidePanelComponent,
+    NewsComponent
   ],
   imports: [
     BrowserModule,
@@ -66,10 +69,11 @@ import { SidePanelComponent } from './shared/side-panel/side-panel.component';
     MatTableModule,
     FormsModule,
     ToastrModule.forRoot({
-      preventDuplicates:true,
-      timeOut:2500
-    })
-  ],
+        preventDuplicates: true,
+        timeOut: 2500
+    }),
+    CdkVirtualScrollableElement
+],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

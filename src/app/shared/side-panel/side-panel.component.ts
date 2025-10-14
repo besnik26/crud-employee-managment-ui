@@ -42,13 +42,17 @@ export class SidePanelComponent implements OnInit{
   }
 
   toggleMemberDropdown(): void {
-    this.memberDropdownOpen = !this.memberDropdownOpen;
     this.newsDropdownOpen = false;
+      this.memberDropdownOpen = !this.memberDropdownOpen;
   }
 
   toggleNewsDropdown(): void {
-    this.newsDropdownOpen = !this.newsDropdownOpen;
     this.memberDropdownOpen = false;
+    this.newsDropdownOpen = !this.newsDropdownOpen;
+  }
+
+  navigateTo(link:string, id:number){
+    this.router.navigate([link + id])
   }
 
   // @HostListener('document:click', ['$event'])

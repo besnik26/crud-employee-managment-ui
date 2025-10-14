@@ -10,6 +10,7 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
 import { RedirectIfAuthGuard } from './guards/redirect-if-auth.guard';
 import { AddCompanyComponent } from './components/admin-dashboard/add-company/add-company.component';
 import { EditCompanyComponent } from './components/admin-dashboard/edit-company/edit-company.component';
+import { NewsComponent } from './components/admin-dashboard/news/news.component';
 
 const routes: Routes = [
   
@@ -32,6 +33,12 @@ const routes: Routes = [
   {
     path: 'admin-dashboard',
     component: AdminDashboardComponent,
+    canActivate: [authGuard],
+    data: { role: 'ROLE_ADMIN' }
+  },
+  {
+    path:'news/:companyId',
+    component:NewsComponent,
     canActivate: [authGuard],
     data: { role: 'ROLE_ADMIN' }
   },

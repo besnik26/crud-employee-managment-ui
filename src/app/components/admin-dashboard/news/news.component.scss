@@ -1,0 +1,11 @@
+.details-container{
+    display: flex;
+    flex-direction: column;
+    .news-container{
+        display: flex;
+        .news-list{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

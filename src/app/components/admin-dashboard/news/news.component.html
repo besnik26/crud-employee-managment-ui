@@ -1,2 +1,31 @@
-<p>news works!</p>
-<h1>newss</h1>
+<div class="details-container">
+
+    <div *ngIf="company">
+        <h3>{{company.name}} News</h3>
+    </div>
+
+    <div class="news-container">
+    
+        <!-- News List -->
+        <div class="news-list">
+            <div *ngFor="let news of newsList" class="news-item">
+                <div class="d-flex justify-content-between">
+                    <h3>{{ news.title }}</h3>
+                    <button (click)="deleteNews(news.id)">
+                        <mat-icon aria-hidden="false" aria-label="Example delete icon" fontIcon="delete"></mat-icon>
+                    </button>
+                </div>
+                <p>{{ news.content }}</p>
+                <small>By {{ news.createdBy?.username }} on {{ news.createdAt | date:'short' }}</small>
+            </div>
+        </div>
+    
+
+        <!-- Create News Form -->
+        <div class="news-form">
+            <input id="title" type="text" [(ngModel)]="newNews.title" placeholder="Title" />
+            <textarea id="content" [(ngModel)]="newNews.content" placeholder="Content"></textarea>
+            <button (click)="publishNews()">Publish</button>
+        </div>
+    </div>
+</div>

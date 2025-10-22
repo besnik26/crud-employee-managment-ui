@@ -1,7 +1,7 @@
 <div class="details-container">
 
     <div *ngIf="company">
-        <h3>{{company.name}} News</h3>
+        <h2>{{company.name}} News</h2>
     </div>
 
     <div class="news-container">
@@ -9,23 +9,25 @@
         <!-- News List -->
         <div class="news-list">
             <div *ngFor="let news of newsList" class="news-item">
-                <div class="d-flex justify-content-between">
-                    <h3>{{ news.title }}</h3>
-                    <button (click)="deleteNews(news.id)">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3>@{{ news.createdByUsername }}</h3>
+                    <button class="delete-btn" (click)="deleteNews(news.id)">
                         <mat-icon aria-hidden="false" aria-label="Example delete icon" fontIcon="delete"></mat-icon>
                     </button>
                 </div>
+                <h4>{{news.title}}</h4>
                 <p>{{ news.content }}</p>
-                <small>By {{ news.createdBy?.username }} on {{ news.createdAt | date:'short' }}</small>
+                <small> {{ news.createdAt | date:'short' }}</small>
             </div>
         </div>
     
 
         <!-- Create News Form -->
         <div class="news-form">
+            <h2>Post news</h2>
             <input id="title" type="text" [(ngModel)]="newNews.title" placeholder="Title" />
             <textarea id="content" [(ngModel)]="newNews.content" placeholder="Content"></textarea>
-            <button (click)="publishNews()">Publish</button>
+            <button class="submit-btn" (click)="publishNews()">Publish</button>
         </div>
     </div>
 </div>

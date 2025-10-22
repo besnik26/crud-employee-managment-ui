@@ -1,0 +1,50 @@
+.details-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .input-div{
+        display: flex;
+        gap: 15px;
+        input{
+            max-width: 250px;
+            width: 100%;
+        }
+        button{
+            width: 100%;
+            max-width: 80px;
+            background-color: rgb(122, 204, 0);
+            color: white;
+            &:hover{
+                background-color: rgb(105, 172, 5);
+            }
+        }
+    }
+}
+
+.delete-btn{
+    background-color: red;
+    color: white;
+    transition: all 0.5s;
+        &:hover{
+            background-color: rgb(153, 2, 2);
+    }
+}
+
+input{
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 40px;
+    padding: 0 0 0 5px;
+}
+
+label{
+    padding: 0 0 0 5px;
+    margin-bottom: 4px;
+}
+
+button{
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    transition: all 0.5s;
+}

@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { CompanyWithUsersDto } from 'src/app/models/CompanyWithUsersDto';
 import { AdminService } from 'src/app/services/admin.service';
+import { UserContextService } from 'src/app/services/user-context.service';
 
 @Component({
   selector: 'app-side-panel',
@@ -16,6 +17,7 @@ export class SidePanelComponent implements OnInit{
   companies: CompanyWithUsersDto[] = [];
   memberDropdownOpen: boolean = false;
   newsDropdownOpen: boolean = false;
+  role = '';
 
   constructor(
     private panelService:PanelService,
@@ -23,7 +25,8 @@ export class SidePanelComponent implements OnInit{
     public authService:AuthService,
     private toaster:ToastrService,
     private elementRef:ElementRef,
-    private adminService:AdminService
+    private adminService:AdminService,
+    private userContext:UserContextService
   ){ 
     this.panelService.sidePanelState$.subscribe(state => {
         this.sidePanelOpen = state;
@@ -32,7 +35,11 @@ export class SidePanelComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    
     this.adminService.getMyCompanies().subscribe(data => this.companies = data);
+    this.userContext.role$.subscribe(role => {
+      this.role = role || '';
+    })
   }
 
   logout(): void {

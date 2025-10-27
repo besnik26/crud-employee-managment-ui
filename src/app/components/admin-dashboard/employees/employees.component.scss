@@ -48,3 +48,17 @@ button{
     border: none;
     transition: all 0.5s;
 }
+
+@media only screen and (max-width: 768px) {
+    .table-cover{
+        width: 100%;
+        overflow-x: auto; 
+        -webkit-overflow-scrolling: touch; 
+    }
+
+    table {
+        width: 100%;
+        min-width: 600px;
+        border-collapse: collapse;
+    }
+}

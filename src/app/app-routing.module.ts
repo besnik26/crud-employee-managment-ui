@@ -46,8 +46,7 @@ const routes: Routes = [
   {
     path:'employees/:companyId',
     component:EmployeesComponent,
-    canActivate: [authGuard],
-    data: { role: 'ROLE_ADMIN' }
+    canActivate: [authGuard]
   },
   {
     path: 'company-details/:companyId',

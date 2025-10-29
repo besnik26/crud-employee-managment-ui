@@ -25,7 +25,6 @@ export class UserDashboardComponent implements OnInit{
       }
     });   
     this.dashboardService.companyUsers$.subscribe(users => this.companyUsers = users);
-
     this.dashboardService.loadDashboard();
   }
 

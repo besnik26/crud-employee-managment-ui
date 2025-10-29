@@ -6,6 +6,8 @@ import { AdminService } from 'src/app/services/admin.service';
 import { JoinRequestService } from 'src/app/services/join-request.service';
 import { takeUntil, Subject } from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
+import { UserContextService } from 'src/app/services/user-context.service';
+import { DashboardService } from 'src/app/services/dashboard.service';
 
 
 @Component({
@@ -19,23 +21,43 @@ export class EmployeesComponent implements OnInit, OnDestroy{
   userIdToInvite: number = 0;
   company: any;
   users: any[] = [];
+  companyUsers: any[] = [];
+
   userIdToAssign!: number;
   displayedColumns: string[] = ['id', 'username','email', 'phoneNumber', 'actions'];
+  displayedColumnsUser: string[] = ['id', 'username','email', 'phoneNumber'];
+
   dataSource:any;
   @ViewChild(MatPaginator) paginator! : MatPaginator;
+  role ='';
 
   constructor(
     private route: ActivatedRoute,
     private adminService:AdminService,
     private joinRequestService:JoinRequestService,
-    private toaster:ToastrService
+    private toaster:ToastrService,
+    private userContext:UserContextService,
+    private dashboardService:DashboardService
   ){}
 
   ngOnInit():void{
+
     this.route.paramMap.pipe(takeUntil(this.destroy$)).subscribe(params => {
       this.companyId = +params.get('companyId')!;
-      this.getCompanyInfo();
-      this.getCompanyUsers();
+    })
+
+    this.userContext.role$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(role => {
+      if (!role) return; 
+      this.role = role;
+
+      if (this.role === 'admin'){
+        this.getCompanyInfo();
+        this.getCompanyUsers();
+      } else if (this.role === 'user'){
+        this.getUserRoleCompanyUsers();
+      }
     })
   }
 
@@ -43,6 +65,8 @@ export class EmployeesComponent implements OnInit, OnDestroy{
     this.destroy$.next();
     this.destroy$.complete();
   }
+ 
+
 
   getCompanyInfo(): void {
     this.adminService.getCompanyById(this.companyId).subscribe(
@@ -52,6 +76,25 @@ export class EmployeesComponent implements OnInit, OnDestroy{
         this.toaster.error('Error fetching company')
       }
     );
+  }
+
+   getUserRoleCompanyUsers(){
+     this.dashboardService.companyUsers$.pipe(takeUntil(this.destroy$)).subscribe({
+      next:(users)=>{
+        this.companyUsers = users
+        this.dataSource = new MatTableDataSource<any>(this.companyUsers)
+      },
+      error:(err)=>{
+        console.error('Error fetching users', err);
+        this.toaster.error('Error fetching users');
+      },
+      complete:() =>{
+          console.log('Users fetched successfully');
+          this.dataSource.paginator = this.paginator;
+          console.log('Complete:' + this.dataSource.paginator);
+        }
+     });
+           
   }
 
   getCompanyUsers(): void {

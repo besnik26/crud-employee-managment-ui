@@ -116,7 +116,7 @@
                     <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
                 </div>
             </div>
-            <div class="route-container" routerLink="/user-dashboard">
+            <div class="route-container" (click)="navigateTo('/employees/',this.user.company.id)">
                 <div class="icon-div">
                     <mat-icon aria-hidden="false" aria-label="Example group icon" fontIcon="group"></mat-icon>
                 </div>
@@ -142,7 +142,7 @@
                 </div>
                 <p class="m-0">Home</p>
             </div>
-            <div class="route-container" routerLink="/user-dashboard">
+            <div class="route-container" (click)="navigateTo('/employees/',this.user.company.id)">
                 <div class="icon-div">
                     <mat-icon aria-hidden="false" aria-label="Example group icon" fontIcon="group"></mat-icon>
                 </div>

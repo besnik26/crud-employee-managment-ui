@@ -32,7 +32,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { SidePanelComponent } from './shared/side-panel/side-panel.component';
 import { NewsComponent } from './components/admin-dashboard/news/news.component';
 import { CdkVirtualScrollableElement } from "@angular/cdk/scrolling";
-import { EmployeesComponent } from './components/admin-dashboard/employees/employees.component';
+import { EmployeesComponent } from './shared/employees/employees.component';
 
 @NgModule({
   declarations: [

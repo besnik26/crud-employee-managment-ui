@@ -11,7 +11,7 @@ import { RedirectIfAuthGuard } from './guards/redirect-if-auth.guard';
 import { AddCompanyComponent } from './components/admin-dashboard/add-company/add-company.component';
 import { EditCompanyComponent } from './components/admin-dashboard/edit-company/edit-company.component';
 import { NewsComponent } from './components/admin-dashboard/news/news.component';
-import { EmployeesComponent } from './components/admin-dashboard/employees/employees.component';
+import { EmployeesComponent } from './shared/employees/employees.component';
 
 const routes: Routes = [
   

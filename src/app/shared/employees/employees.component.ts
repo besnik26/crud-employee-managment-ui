@@ -44,21 +44,24 @@ export class EmployeesComponent implements OnInit, OnDestroy{
 
     this.route.paramMap.pipe(takeUntil(this.destroy$)).subscribe(params => {
       this.companyId = +params.get('companyId')!;
+
+      this.userContext.role$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(role => {
+        if (!role) return; 
+        this.role = role;
+
+        if (this.role === 'admin'){
+          this.getCompanyInfo();
+          this.getCompanyUsers();
+        } else if (this.role === 'user'){
+          this.dashboardService.loadDashboard();
+          this.getUserRoleCompanyUsers();
+        }
+      })
     })
 
-    this.userContext.role$
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(role => {
-      if (!role) return; 
-      this.role = role;
-
-      if (this.role === 'admin'){
-        this.getCompanyInfo();
-        this.getCompanyUsers();
-      } else if (this.role === 'user'){
-        this.getUserRoleCompanyUsers();
-      }
-    })
+    
   }
 
   ngOnDestroy(): void {

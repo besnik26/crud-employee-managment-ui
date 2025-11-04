@@ -55,20 +55,29 @@
 
 .company-container{
   display: flex;
+  flex-wrap: wrap;
   gap: 30px;
   .company-card{
     position: relative;
-    min-height: 250px;
+    min-height: 350px;
     padding: 25px;
     min-width: 350px;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
     border-radius: 30px;
+    background-color: rgba(163, 234, 255, 0.1);
     p{
       margin:  0 0 0 5px;
     }
     h1{
+      font-size: 30px;
       font-weight: bold;
+      color: #1070d6;
+      max-width: 220px;
+    }
+    h2{
+      font-weight: bold;
+      color: #1070d6;
     }
     
     button{
@@ -124,6 +133,34 @@
   }
 }
 
+.company-img-div{
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  opacity: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 150px;
+  img{
+    width: 100%;
+    height: auto;
+  }
+}
+
+.company-id{
+  position: absolute;
+  left: 25px;
+  bottom: 25px;
+  opacity: 60%;
+}
+
+
+@media only screen and (max-width: 1276px) {
+  .company-card{
+    
+  }
+}
 @media only screen and (max-width: 768px) {
   .company-container{
     flex-wrap: wrap;

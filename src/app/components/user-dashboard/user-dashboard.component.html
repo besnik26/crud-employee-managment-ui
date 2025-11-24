@@ -18,18 +18,6 @@
       <p><strong>Location:</strong> {{ user.company.location }}</p>
     </div>
 
-    <div *ngIf="companyUsers.length > 0">
-      <h3>Company Users</h3>
-      <ul>
-        <li *ngFor="let user of companyUsers">
-          {{ user.username }} ({{ user.role }})
-        </li>
-      </ul>
-    </div>
-    <div *ngIf="companyUsers.length === 0">
-      You are not assigned to any company yet.
-    </div>
-
   </div>
   <div>
     <h2>Company News</h2>

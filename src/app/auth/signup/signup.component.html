@@ -7,22 +7,31 @@
     <h2>Sign in to EMS</h2>
     <div class="form-field-div">
       <label for="username">Username</label>
-      <input type="text" id="username" formControlName="username">
+      <input 
+        type="text" 
+        id="username" 
+        formControlName="username" 
+        maxlength="25"
+        (keypress)="allowOnlyAlphaNumeric($event)">
+      <small *ngIf="this.signupForm.get('username')?.touched && this.signupForm.get('username')?.invalid">This field is required</small>
     </div>
 
     <div class="form-field-div">
       <label for="email">Email</label>
       <input type="email" id="email" formControlName="email">
+      <small *ngIf="this.signupForm.get('email')?.touched && this.signupForm.get('email')?.invalid">This field is required</small>
     </div>
 
     <div class="form-field-div">
       <label for="phone">Phone Number</label>
       <input type="text" id="phone" formControlName="phoneNumber">
+      <small *ngIf="this.signupForm.get('phoneNumber')?.touched && this.signupForm.get('phoneNumber')?.invalid">This field is required</small>
     </div>
   
     <div class="form-field-div">
       <label for="password">Password</label>
-      <input type="password" id="password" formControlName="password">
+      <input type="password" id="password" formControlName="password" maxlength="30">
+      <small *ngIf="this.signupForm.get('password')?.touched && this.signupForm.get('password')?.invalid">This field is required</small>
     </div>
     
     <div class="form-field-div">
@@ -34,7 +43,7 @@
     </div>
 
     <div class="d-flex flex-column align-items-center">
-      <button [disabled]="signupForm.invalid" (click)="onSubmit()">Sign in</button>
+      <button (click)="onSubmit()">Sign in</button>
       <p>Already have an account ? <a routerLink="/login">Log in</a></p>
     </div>
   

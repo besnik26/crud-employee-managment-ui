@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -15,7 +15,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.scss']
 })
-export class EmployeesComponent implements OnInit, OnDestroy{
+export class EmployeesComponent implements OnInit , OnDestroy{
   private destroy$ = new Subject<void>(); 
   companyId!: number;
   userIdToInvite: number = 0;
@@ -60,16 +60,16 @@ export class EmployeesComponent implements OnInit, OnDestroy{
         }
       })
     })
-
-    
   }
+
+  // ngAfterViewInit(): void {
+  //   this.dataSource.paginator = this.paginator;
+  // }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
- 
-
 
   getCompanyInfo(): void {
     this.adminService.getCompanyById(this.companyId).subscribe(
@@ -81,11 +81,14 @@ export class EmployeesComponent implements OnInit, OnDestroy{
     );
   }
 
-   getUserRoleCompanyUsers(){
+  getUserRoleCompanyUsers(){
      this.dashboardService.companyUsers$.pipe(takeUntil(this.destroy$)).subscribe({
       next:(users)=>{
         this.companyUsers = users
         this.dataSource = new MatTableDataSource<any>(this.companyUsers)
+        setTimeout(() => {
+          this.dataSource.paginator = this.paginator;
+        });
       },
       error:(err)=>{
         console.error('Error fetching users', err);

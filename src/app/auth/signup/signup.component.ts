@@ -43,6 +43,25 @@ export class SignupComponent {
           this.toaster.error('Signup failed. Please try again.');
         }
       });
+    }else{
+      this.markFormGroupTouched(this.signupForm);
+    }
+  }
+
+  markFormGroupTouched(formGroup:FormGroup){
+    Object.values(formGroup.controls).forEach(control =>{
+      control.markAsTouched();
+    })
+  }
+
+  
+  
+  allowOnlyAlphaNumeric(event: KeyboardEvent) {
+    const regex = /^[A-Za-z0-9]+$/;
+    const inputChar = String.fromCharCode(event.keyCode || event.which);
+
+    if (!regex.test(inputChar)) {
+      event.preventDefault();
     }
   }
 

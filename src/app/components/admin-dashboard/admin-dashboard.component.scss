@@ -9,8 +9,9 @@
   }
 }
 .title{
-  font-size: 40px;
+  font-size: 32px;
   font-weight: bolder;
+  margin: 10px 0 20px 0;
 }
 .total-companies{
   display: flex;
@@ -78,6 +79,7 @@
     h2{
       font-weight: bold;
       color: #1070d6;
+      margin: 0px;
     }
     
     button{

@@ -4,7 +4,7 @@
 <div class="dashboard-cover" *ngIf="user">
 
   <div class="personal-details">
-    <h2>Welcome, {{ user.username }}</h2>
+    <h2>Welcome, {{ user.firstName  + ' ' + user.lastName}}</h2>
     <p><strong>ID:</strong> {{ user.id }}</p>
     <p><strong>Role:</strong> {{ user.role }}</p>
   </div>
@@ -24,7 +24,7 @@
     <div *ngFor="let news of newsList" class="news-item">
       <h3>{{ news.title }}</h3>
       <p>{{ news.content }}</p>
-      <small>By {{ news.createdBy?.username }} on {{ news.createdAt | date:'short' }}</small>
+      <small>By {{ news.createdByEmail }} on {{ news.createdAt | date:'short' }}</small>
     </div>
   </div>
 

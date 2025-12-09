@@ -21,7 +21,8 @@ export class SignupComponent {
     private toaster:ToastrService
   ) {
     this.signupForm = this.fb.group({
-      username: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       email:['', [Validators.required, Validators.email]],
       phoneNumber:['', [Validators.required, Validators.pattern('^\\+?[0-9]{10,15}$')]],
       password: ['', Validators.required],

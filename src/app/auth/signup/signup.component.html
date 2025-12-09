@@ -6,14 +6,23 @@
   <form [formGroup]="signupForm" class="form-container">
     <h2>Sign in to EMS</h2>
     <div class="form-field-div">
-      <label for="username">Username</label>
+      <label for="firstName">First Name</label>
       <input 
         type="text" 
-        id="username" 
-        formControlName="username" 
-        maxlength="25"
-        (keypress)="allowOnlyAlphaNumeric($event)">
-      <small *ngIf="this.signupForm.get('username')?.touched && this.signupForm.get('username')?.invalid">This field is required</small>
+        id="firstName" 
+        formControlName="firstName" 
+      >
+      <small *ngIf="this.signupForm.get('firstName')?.touched && this.signupForm.get('firstName')?.invalid">This field is required</small>
+    </div>
+    
+    <div class="form-field-div">
+      <label for="lastName">Last Name</label>
+      <input 
+        type="text" 
+        id="lastName" 
+        formControlName="lastName" 
+      >
+      <small *ngIf="this.signupForm.get('lastName')?.touched && this.signupForm.get('lastName')?.invalid">This field is required</small>
     </div>
 
     <div class="form-field-div">

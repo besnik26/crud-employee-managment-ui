@@ -8,6 +8,7 @@ import { takeUntil, Subject } from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
 import { UserContextService } from 'src/app/services/user-context.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import {MatSort} from '@angular/material/sort';
 
 
 @Component({
@@ -24,11 +25,13 @@ export class EmployeesComponent implements OnInit , OnDestroy{
   companyUsers: any[] = [];
 
   userIdToAssign!: number;
-  displayedColumns: string[] = ['id', 'username','email', 'phoneNumber', 'actions'];
-  displayedColumnsUser: string[] = ['id', 'username','email', 'phoneNumber'];
+  displayedColumns: string[] = ['id', 'firstName','lastName','email', 'phoneNumber', 'actions'];
+  displayedColumnsUser: string[] = ['id', 'firstName','lastName','email', 'phoneNumber'];
 
   dataSource:any;
   @ViewChild(MatPaginator) paginator! : MatPaginator;
+  @ViewChild(MatSort) sort! : MatSort;
+
   role ='';
 
   constructor(
@@ -61,10 +64,6 @@ export class EmployeesComponent implements OnInit , OnDestroy{
       })
     })
   }
-
-  // ngAfterViewInit(): void {
-  //   this.dataSource.paginator = this.paginator;
-  // }
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -116,6 +115,7 @@ export class EmployeesComponent implements OnInit , OnDestroy{
         complete:() =>{
           console.log('Users fetched successfully');
           this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
           console.log('Complete:' + this.dataSource.paginator);
         }
       });

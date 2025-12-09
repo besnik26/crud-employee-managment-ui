@@ -9,11 +9,18 @@ export class AuthService {
 
   constructor(private http: HttpClient, private userContext: UserContextService) {}
 
-  login(credentials: { username: string; password: string }): Observable<any> {
+  login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, credentials);
   }
 
-  signup(data: { username: string; email:string; phoneNumber:string; password: string; role: string }): Observable<any> {
+  signup(data: { 
+    firstName: string; 
+    lastName: string; 
+    email:string; 
+    phoneNumber:string; 
+    password: string; 
+    role: string 
+  }): Observable<any> {
     return this.http.post(`${this.baseUrl}/signup`, data);
   }
 

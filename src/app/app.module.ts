@@ -33,6 +33,8 @@ import { SidePanelComponent } from './shared/side-panel/side-panel.component';
 import { NewsComponent } from './components/admin-dashboard/news/news.component';
 import { CdkVirtualScrollableElement } from "@angular/cdk/scrolling";
 import { EmployeesComponent } from './shared/employees/employees.component';
+import {MatCardModule} from '@angular/material/card';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,8 @@ import { EmployeesComponent } from './shared/employees/employees.component';
     MatPaginatorModule,
     MatTableModule,
     ReactiveFormsModule,
+    MatCardModule,
+    MatSortModule,
     MatTableModule,
     FormsModule,
     ToastrModule.forRoot({

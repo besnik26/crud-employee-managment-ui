@@ -35,13 +35,18 @@ export class AuthService {
   }
 
   isTokenExpired(): boolean {
-    const token = localStorage.getItem('token');
-    if (!token) return true;
+  const token = localStorage.getItem('token');
+  if (!token) return true;
 
+  try {
     const payload = JSON.parse(atob(token.split('.')[1]));
     const expiry = payload.exp;
-
     return (Math.floor(Date.now() / 1000) > expiry);
+  } catch (e) {
+    console.error('Invalid token', e);
+    this.logout(); 
+    return true;
   }
+}
 
 }

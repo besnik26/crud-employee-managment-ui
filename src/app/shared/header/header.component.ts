@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserContextService } from 'src/app/services/user-context.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
@@ -14,6 +14,11 @@ export class HeaderComponent  implements OnInit{
   role = '';
   notifications: any[] = [];
   showNotifications = false;
+  sidePanelOpen?:boolean;
+  
+  @ViewChild('notificationBtn') button!:ElementRef;
+  @ViewChild('notificationPanel') panel!:ElementRef;
+
 
   constructor(
     public authService: AuthService,
@@ -23,7 +28,11 @@ export class HeaderComponent  implements OnInit{
     private toaster:ToastrService,
     private elementRef:ElementRef,
     private panelService:PanelService
-  ) {}
+  ) {
+    this.panelService.sidePanelState$.subscribe(state => {
+        this.sidePanelOpen = state;
+    });
+  }
 
   ngOnInit(): void {
     this.userContext.role$.subscribe(role => {
@@ -33,6 +42,7 @@ export class HeaderComponent  implements OnInit{
   }
 
   toggleNotifications(): void {
+    event?.stopPropagation();
     this.showNotifications = !this.showNotifications;
   }
 
@@ -57,11 +67,16 @@ export class HeaderComponent  implements OnInit{
   }
 
   @HostListener('document:click', ['$event'])
-  ClickOut(event: MouseEvent) {
-    const isClickedOutside = !this.elementRef.nativeElement.contains(
-      event.target as Node
-    );
-    if (isClickedOutside) {
+  onDocumentClick(event: MouseEvent) {
+    if (!this.showNotifications) return;
+
+    const clickedInsidePanel =
+      this.panel?.nativeElement.contains(event.target);
+
+    const clickedButton =
+      this.button?.nativeElement.contains(event.target);
+
+    if (!clickedInsidePanel && !clickedButton) {
       this.showNotifications = false;
     }
   }

@@ -3,29 +3,36 @@ import { BehaviorSubject } from 'rxjs';
 import { UserService } from './user.service';
 import { JoinRequestService } from './join-request.service';
 import { CompanyJoinRequest } from '../models/company-join-request.model';
+import { NewsService } from './news.service';
 
 @Injectable({ providedIn: 'root' })
 export class DashboardService {
   private userSubject = new BehaviorSubject<any>(null);
   private companyUsersSubject = new BehaviorSubject<any[]>([]);
   private joinRequestsSubject = new BehaviorSubject<CompanyJoinRequest[]>([]);
+  private newsSubject = new BehaviorSubject<any[]>([]);
 
   user$ = this.userSubject.asObservable();
   companyUsers$ = this.companyUsersSubject.asObservable();
   joinRequests$ = this.joinRequestsSubject.asObservable();
+  news$ = this.newsSubject.asObservable();
 
   constructor(
     private userService: UserService,
+    private newsService:NewsService
   ) {}
 
-  loadDashboard(): void {
-    this.loadUser();
-    this.loadCompanyUsers();
-  }
 
   loadUser(): void {
     this.userService.getUserDashboard().subscribe({
-      next: data => this.userSubject.next(data),
+      next: user => {
+        this.userSubject.next(user);
+        if (user?.company?.id) {
+          this.loadCompanyNews(user.company.id);
+        } else {
+          this.newsSubject.next([]);
+        }
+      },
       error: err => console.error('Error loading user dashboard', err)
     });
   }
@@ -41,6 +48,13 @@ export class DashboardService {
           console.error('Unexpected error loading company users:', err);
         }
       }
+    });
+  }
+
+  loadCompanyNews(companyId: number): void {
+    this.newsService.getCompanyNews(companyId).subscribe({
+      next: news => this.newsSubject.next(news),
+      error: err => console.error('Error loading company news', err)
     });
   }
 

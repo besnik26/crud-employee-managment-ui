@@ -10,7 +10,7 @@
         <div class="news-list">
             <div *ngFor="let news of newsList" class="news-item">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h3>@{{ news.createdByEmail }}</h3>
+                    <h3>{{ news.createdByEmail }}</h3>
                     <button class="delete-btn" (click)="deleteNews(news.id)">
                         <mat-icon aria-hidden="false" aria-label="Example delete icon" fontIcon="delete"></mat-icon>
                     </button>

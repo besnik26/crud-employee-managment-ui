@@ -18,14 +18,10 @@ export class UserDashboardComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.dashboardService.user$.subscribe(user => {
-      this.user = user;
-      if (user?.company?.id) {
-        this.loadNews(user.company.id);
-      }
-    });   
+    this.dashboardService.user$.subscribe(user => this.user = user);
+    this.dashboardService.news$.subscribe(news => this.newsList = news)
     this.dashboardService.companyUsers$.subscribe(users => this.companyUsers = users);
-    this.dashboardService.loadDashboard();
+    this.dashboardService.loadUser();
   }
 
   loadNews(companyId: number): void {

@@ -67,7 +67,7 @@ export class UserContextService {
     this.joinRequestService.respondToRequest(requestId, accepted).subscribe({
       next: () => {
         console.log("Join request response successful");
-        this.dashboardService.loadDashboard();
+        this.dashboardService.loadUser();
         this.refreshNotifications();
       },
       error: err => console.error("Error responding to join request", err)

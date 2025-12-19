@@ -1,19 +1,23 @@
 <p class="m-0">
   <mat-toolbar color="primary" class="navbar">
     <div *ngIf="authService.isLoggedIn()" (click)="toggleSidePanel()" class="icon-div">
-      <mat-icon aria-hidden="false" aria-label="Example menus icon" fontIcon="menu"></mat-icon>
+
+      <mat-icon *ngIf="!sidePanelOpen" aria-hidden="false" aria-label="Example menus icon" fontIcon="menu"></mat-icon>
+      <mat-icon *ngIf="sidePanelOpen" aria-hidden="false" aria-label="Example close icon" fontIcon="close"></mat-icon>
+
+
     </div>
     <span class="monoton-regular">EMS</span>
     <div style="width: auto;" class="d-flex align-items-center" *ngIf="authService.isLoggedIn()">
       <div style="position: relative;">
-        <div class="notification-wrapper mr-0" (click)="toggleNotifications()">
+        <div class="notification-wrapper mr-0" #notificationBtn (click)="toggleNotifications()">
             <mat-icon aria-hidden="false"  aria-label="Example location icon" fontIcon="notifications"></mat-icon>
             <div>
               <span *ngIf="notifications.length > 0" class="badge">{{ notifications.length }}</span>
             </div>
         </div>
 
-          <div class="show-notifications" *ngIf="showNotifications">
+          <div class="show-notifications" #notificationPanel *ngIf="showNotifications">
             <div class="notification-div">
               <h3 class="text-center mb-3" *ngIf="notifications.length !== 0">Notifications</h3>
               <ul>

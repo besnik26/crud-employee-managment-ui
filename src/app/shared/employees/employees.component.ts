@@ -58,7 +58,7 @@ export class EmployeesComponent implements OnInit , OnDestroy{
           this.getCompanyInfo();
           this.getCompanyUsers();
         } else if (this.role === 'user'){
-          this.dashboardService.loadDashboard();
+          this.dashboardService.loadCompanyUsers();
           this.getUserRoleCompanyUsers();
         }
       })
@@ -87,6 +87,7 @@ export class EmployeesComponent implements OnInit , OnDestroy{
         this.dataSource = new MatTableDataSource<any>(this.companyUsers)
         setTimeout(() => {
           this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
         });
       },
       error:(err)=>{
@@ -96,6 +97,7 @@ export class EmployeesComponent implements OnInit , OnDestroy{
       complete:() =>{
           console.log('Users fetched successfully');
           this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
           console.log('Complete:' + this.dataSource.paginator);
         }
      });
@@ -107,6 +109,7 @@ export class EmployeesComponent implements OnInit , OnDestroy{
         next:(data) =>{
           this.users = data;
           this.dataSource =  new MatTableDataSource<any>(this.users)
+          
         },
         error:(err)=>{
           console.error('Error fetching users', err);

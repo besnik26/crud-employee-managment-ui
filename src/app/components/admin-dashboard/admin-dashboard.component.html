@@ -1,13 +1,27 @@
 <section *ngIf="dashboardData">
-  <!-- <h1 class="title">Welcome, {{dashboardData.adminUsername}}!</h1> -->
-   <h1 class="fw-bolder">Admin Dashboard</h1>
+   <h1 class="fw-bolder main-title">Admin Dashboard</h1>
 </section>
 
-<div>
-  <div class="total-companies" *ngIf="dashboardData">
-    <h3>Total Companies: {{ dashboardData.totalCompanies }}</h3>
-    <button routerLink="/add-company" class="add-btn">Add Company +</button>
+<div class="dashboard-div">
+
+  <div class="info-section">
+    <div class="info-cover">
+
+      <div class="info-div total-companies" *ngIf="dashboardData">
+        <h2>Total Companies: {{ dashboardData.totalCompanies }}</h2>
+      </div>
+  
+      <div class="info-div total-employees">
+        <h2>Total Employees: {{ totalEmployees }}</h2>
+      </div>
+    </div>
+
+    <div routerLink="/add-company" class="info-div add-company">
+      <h2>Add Company +</h2>
+    </div>
   </div>
+
+
   <div class="company-container">
     <div *ngFor="let company of companies" class="company-card">
       <h1>{{ company.name }}</h1>
@@ -21,16 +35,16 @@
       </div>
       <div class="d-flex align-items-center mb-2" *ngIf="company.users.length === 1">
         <mat-icon style="color: blue;" aria-hidden="false" aria-label="Example location icon" fontIcon="group"></mat-icon>
-        <p>{{company.users.length}} member</p>
+        <p>{{company.users.length}} employee</p>
       </div>
       <div class="d-flex align-items-center mb-2" *ngIf="company.users.length > 1">
         <mat-icon style="color: blue;" aria-hidden="false" aria-label="Example location icon" fontIcon="group"></mat-icon>
-        <p>{{company.users.length}} members</p>
+        <p>{{company.users.length}} employees</p>
       </div>
   
       <div class="d-flex align-items-center mb-2" *ngIf="company.users.length === 0;">
         <mat-icon style="color: blue;" aria-hidden="false" aria-label="Example location icon" fontIcon="group"></mat-icon>
-        <p>No members assigned</p>
+        <p>No employees assigned</p>
       </div>
       <div class="company-id">
         <h2>

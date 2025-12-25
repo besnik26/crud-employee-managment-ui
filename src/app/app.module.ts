@@ -35,6 +35,8 @@ import { CdkVirtualScrollableElement } from "@angular/cdk/scrolling";
 import { EmployeesComponent } from './shared/employees/employees.component';
 import {MatCardModule} from '@angular/material/card';
 import { MatSortModule } from '@angular/material/sort';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { NewsModalComponent } from './components/admin-dashboard/news-modal/news-modal.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { MatSortModule } from '@angular/material/sort';
     CompanyDetailsComponent,
     SidePanelComponent,
     NewsComponent,
-    EmployeesComponent
+    EmployeesComponent,
+    NewsModalComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatButtonModule,
     MatPaginatorModule,
     MatTableModule,
+    MatDialogModule,
     ReactiveFormsModule,
     MatCardModule,
     MatSortModule,

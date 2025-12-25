@@ -22,12 +22,16 @@
         </div>
     
 
-        <!-- Create News Form -->
+        
         <div class="news-form">
             <h2>Post news</h2>
             <input id="title" type="text" [(ngModel)]="newNews.title" placeholder="Title" />
             <textarea id="content" [(ngModel)]="newNews.content" placeholder="Content"></textarea>
-            <button class="submit-btn" (click)="publishNews()">Publish</button>
+            <button class="submit-btn" (click)="publishNews()">Post</button>
         </div>
+
     </div>
+    <button class="dialog-button" (click)="openDialog()">
+        <mat-icon aria-hidden="false" aria-label="Example news icon" fontIcon="post_add"></mat-icon>
+    </button>
 </div>

@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/services/admin.service';
 import { NewsService } from 'src/app/services/news.service';
 import { takeUntil, Subject } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { NewsModalComponent } from '../news-modal/news-modal.component';
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
@@ -21,7 +23,8 @@ export class NewsComponent implements OnInit, OnDestroy {
     private route:ActivatedRoute,
     private adminService:AdminService,
     private newsService:NewsService,
-    private toaster:ToastrService
+    private toaster:ToastrService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +38,18 @@ export class NewsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  openDialog(){
+    const dialogRef = this.dialog.open(NewsModalComponent, {
+      width: '400px',
+      data:{companyId: this.companyId}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    if(result === 'submitted') {
+      this.loadNews();  
+    }
+  });
   }
 
   getCompanyInfo():void{

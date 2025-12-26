@@ -19,6 +19,10 @@
                 <p>{{ news.content }}</p>
                 <small> {{ news.createdAt | date:'short' }}</small>
             </div>
+            <div class="img-div" *ngIf="newsList.length === 0">
+                <p>No news posted yet.</p>
+                <img src="../../../../assets/news/new-post.svg" alt="new-post">
+            </div>
         </div>
     
 

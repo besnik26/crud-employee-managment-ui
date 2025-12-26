@@ -22,7 +22,7 @@
   </div>
 
 
-  <div class="company-container">
+  <div class="company-container" *ngIf="companies.length > 0">
     <div *ngFor="let company of companies" class="company-card">
       <h1>{{ company.name }}</h1>
       <div class="d-flex align-items-center mb-2">
@@ -67,7 +67,12 @@
       </div>
   
     </div>
+    
   </div>
+  <div class="img-div" *ngIf="companies.length === 0">
+      <p>No companies added yet.</p>
+      <img src="../../../assets/home/dashboard-stats.svg" alt="dashboard-stats">
+    </div>
 </div>
 
 

@@ -6,7 +6,7 @@
 
 
   <div class="details-container" *ngIf="role ==='admin'">
-    <label for="userId">Invite User to Company:</label>
+      <label for="userId">Invite Employee to Company:</label>
       <div class="invite-container">
         <div class="input-div">
           <input
@@ -22,7 +22,7 @@
       
         
       
-      <div class="table-cover">
+      <div class="table-cover" *ngIf="users.length > 0">
         <table matSort mat-table [dataSource]="dataSource">
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
@@ -65,10 +65,15 @@
       <mat-paginator 
         [pageSizeOptions]="[5, 10, 20]"
         showFirstLastButtons
-        aria-label="Select page of periodic elements">
+        aria-label="Select page of periodic elements"
+        *ngIf="users.length > 0"
+        >
       </mat-paginator>
       
-      <p *ngIf="users.length === 0">No users assigned yet.</p>
+      <div class="img-div" *ngIf="users.length === 0">
+        <p >No employees assigned yet.</p>
+        <img src="../../../assets/employee/add-employee.svg" alt="add-employee">
+      </div>
   </div>
 
 
@@ -111,6 +116,7 @@
         showFirstLastButtons
         aria-label="Select page of periodic elements">
       </mat-paginator>
+
       
   </div>
 

@@ -14,6 +14,7 @@
   column-gap: 50px;
 }
 
+
 .info-section{
   width: 30%;
   height: auto;
@@ -186,6 +187,18 @@
   }
 }
 
+
+.img-div{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    img{
+        max-height: 400px;
+    }
+}
+
 .company-id{
   position: absolute;
   left: 25px;
@@ -227,6 +240,9 @@
         width: 100%;
       }
     }
+  }
+  .img-div{
+    width: 100%;
   }
 }
 

@@ -11,6 +11,7 @@ body {
 * {
   scrollbar-width: thin;
   scrollbar-color: #aaa transparent;
+  box-sizing: border-box;
 }
 
 ::-webkit-scrollbar {

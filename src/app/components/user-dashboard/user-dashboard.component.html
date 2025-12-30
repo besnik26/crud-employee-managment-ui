@@ -3,33 +3,43 @@
 
 <div class="dashboard-cover" *ngIf="user">
 
-  <div class="personal-details">
-    <h2>Welcome, {{ user.firstName  + ' ' + user.lastName}}</h2>
-    <p><strong>ID:</strong> {{ user.id }}</p>
-    <p><strong>Role:</strong> {{ user.role }}</p>
-  </div>
-
-
-  <div class="company-details">
-    <div *ngIf="user.company">
-      <h2>Company Details</h2>
-      <p><strong>Name:</strong> {{ user.company.name }}</p>
-      <p><strong>Industry:</strong> {{ user.company.industry }}</p>
-      <p><strong>Location:</strong> {{ user.company.location }}</p>
+  <div class="dashboard-info">
+    <div class="box-style user-div">
+      <h2>Personal Details</h2>
+      <div class="personal-div">
+        <mat-icon aria-hidden="false" aria-label="Example location icon" fontIcon="person"></mat-icon>
+        <p>{{user.firstName + ' ' + user.lastName}}</p>
+      </div>
+      <p><strong>ID</strong>: {{user.id}}</p>
+      <p><strong>Role:</strong> {{ user.role }}</p>
     </div>
-
+  
+  
+    <div class="box-style company-details">
+      <div *ngIf="user.company">
+        <h2>Company Details</h2>
+        <p><strong>Name:</strong> {{ user.company.name }}</p>
+        <p><strong>Industry:</strong> {{ user.company.industry }}</p>
+        <p><strong>Location:</strong> {{ user.company.location }}</p>
+      </div>
+    </div>
   </div>
-  <div>
+
+
+
+  <div class="news-cover">
     <h2>Company News</h2>
-    <div *ngFor="let news of newsList" class="news-item">
-      <h3>{{ news.title }}</h3>
-      <p>{{ news.content }}</p>
-      <small>By {{ news.createdByEmail }} on {{ news.createdAt | date:'short' }}</small>
+    <div class="scroll-div">
+      <div *ngFor="let news of newsList" class="news-item">
+        <h3>{{ news.title }}</h3>
+        <p>{{ news.content }}</p>
+        <small>By {{ news.createdByEmail }} on {{ news.createdAt | date:'short' }}</small>
+      </div>
     </div>
   </div>
 
-  <div class="img-div">
+  <!-- <div class="img-div">
       <img src="../../../assets/visual-data.svg" alt="visual-data">
-  </div>
+  </div> -->
   
 </div>

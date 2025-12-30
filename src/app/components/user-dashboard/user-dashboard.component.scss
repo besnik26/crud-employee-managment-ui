@@ -1,18 +1,69 @@
+h2{
+    font-weight: 600;
+}
+
 .dashboard-cover{
     width: 100%;
     display: flex;
-    gap: 50px;
+    column-gap:50px;
     padding: 20px;
-    h2{
-        margin-bottom: 25px;
-    }
-    .company-details{
+    max-height: calc(100vh - 84px);
 
-    }
-    .img-div{
-        width: 250px;
-        img{
-            width: 100%;
+    .dashboard-info{
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        width: 30%;
+        .box-style{
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            p{
+                font-size: 16px;
+            }
+        }
+        .user-div{
+            border: 2px solid rgb(1, 189, 1);
+            background-color: rgba(1, 189, 1, 0.2);
+            color: rgb(1, 189, 1);
+            .personal-div{
+                display: flex;
+                align-items: center;
+                column-gap: 5px;
+                margin-bottom: 12px;
+                p{margin-bottom: 0;}
+            }
+        }
+
+        .company-details{
+            border: 2px solid rgb(158, 0, 158);
+            color: rgb(158, 0, 158);
+            background-color: rgba(158, 0, 158, 0.2);
         }
     }
+
+    .news-cover{
+        flex: 1;
+        overflow-y: auto;
+    }
+    .scroll-div{
+       padding-right: 15px;
+        .news-item{
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            border-bottom: 1px solid #979797;
+            padding: 10px 0px;
+            &:last-child{
+                border-bottom: none;
+            }
+            h3{
+                font-weight: 500;
+            }
+            p{
+                color: #979797;
+            }
+        }
+    }
+
+
 }

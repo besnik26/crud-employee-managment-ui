@@ -6,7 +6,7 @@
     .dashboard{
         width: 100%;
         padding: 10px 32px;
-        height: calc(100vh - 64px);
+        max-height: calc(100vh - 64px);
         overflow-y: scroll;
 
     }

@@ -45,6 +45,9 @@ h2{
     .news-cover{
         flex: 1;
         overflow-y: auto;
+        h2{
+            color: #3f51b5;
+        }
     }
     .scroll-div{
        padding-right: 15px;
@@ -66,4 +69,43 @@ h2{
     }
 
 
+}
+
+@media only screen and (max-width: 768px) {
+
+    .dashboard-cover{
+        flex-direction: column;
+        padding: 10px 0px;
+        .dashboard-info{
+            flex-direction: row;
+            width: 100%;
+            column-gap: 10px;
+            margin-bottom: 10px;
+            .box-style{
+                width: 50%;
+                padding:10px;
+            }
+        }
+        .news-cover{
+            overflow-y: visible;
+            h2{
+                margin-bottom: 0px;
+            }
+            .scroll-div{
+                padding-right: 0px;
+            }
+        }
+    }
+
+}
+
+@media only screen and (max-width: 425px) {
+    .box-style{
+        h2{
+            font-size: 16px;
+        }
+        p{
+            font-size: 14px!important;
+        }
+    }
 }

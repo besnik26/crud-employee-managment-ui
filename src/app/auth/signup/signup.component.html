@@ -1,61 +1,66 @@
+<div class="main-div">
+  <div class="img-div">
+    <img src="../../../assets/signup/signup-photo.svg" alt="signup">
+  </div>
 
-
-
-<div class="custom-container">
-
-  <form [formGroup]="signupForm" class="form-container">
-    <h2>Sign in to EMS</h2>
-    <div class="form-field-div">
-      <label for="firstName">First Name</label>
-      <input 
-        type="text" 
-        id="firstName" 
-        formControlName="firstName" 
-      >
-      <small *ngIf="this.signupForm.get('firstName')?.touched && this.signupForm.get('firstName')?.invalid">This field is required</small>
-    </div>
-    
-    <div class="form-field-div">
-      <label for="lastName">Last Name</label>
-      <input 
-        type="text" 
-        id="lastName" 
-        formControlName="lastName" 
-      >
-      <small *ngIf="this.signupForm.get('lastName')?.touched && this.signupForm.get('lastName')?.invalid">This field is required</small>
-    </div>
-
-    <div class="form-field-div">
-      <label for="email">Email</label>
-      <input type="email" id="email" formControlName="email">
-      <small *ngIf="this.signupForm.get('email')?.touched && this.signupForm.get('email')?.invalid">This field is required</small>
-    </div>
-
-    <div class="form-field-div">
-      <label for="phone">Phone Number</label>
-      <input type="text" id="phone" formControlName="phoneNumber">
-      <small *ngIf="this.signupForm.get('phoneNumber')?.touched && this.signupForm.get('phoneNumber')?.invalid">This field is required</small>
-    </div>
+  <div class="custom-container">
   
-    <div class="form-field-div">
-      <label for="password">Password</label>
-      <input type="password" id="password" formControlName="password" maxlength="30">
-      <small *ngIf="this.signupForm.get('password')?.touched && this.signupForm.get('password')?.invalid">This field is required</small>
-    </div>
-    
-    <div class="form-field-div">
-      <label for="role">Role</label>
-      <select formControlName="role" id="role">
-        <option value="ROLE_USER">User</option>
-        <option value="ROLE_ADMIN">Admin</option>
-      </select>
-    </div>
+    <h2>Sign in to EMS</h2>
+    <form [formGroup]="signupForm" class="form-container">
 
+        <div class="form-field-div">
+          <label for="firstName">First Name</label>
+          <input 
+            type="text" 
+            id="firstName" 
+            formControlName="firstName" 
+          >
+          <small *ngIf="this.signupForm.get('firstName')?.touched && this.signupForm.get('firstName')?.invalid">This field is required</small>
+        </div>
+        
+        <div class="form-field-div">
+          <label for="lastName">Last Name</label>
+          <input 
+            type="text" 
+            id="lastName" 
+            formControlName="lastName" 
+          >
+          <small *ngIf="this.signupForm.get('lastName')?.touched && this.signupForm.get('lastName')?.invalid">This field is required</small>
+        </div>
+    
+        <div class="form-field-div">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email">
+          <small *ngIf="this.signupForm.get('email')?.touched && this.signupForm.get('email')?.invalid">This field is required</small>
+        </div>
+
+        <div class="form-field-div">
+          <label for="phone">Phone Number</label>
+          <input type="text" id="phone" formControlName="phoneNumber">
+          <small *ngIf="this.signupForm.get('phoneNumber')?.touched && this.signupForm.get('phoneNumber')?.invalid">This field is required</small>
+        </div>
+      
+        <div class="form-field-div">
+          <label for="password">Password</label>
+          <input type="password" id="password" formControlName="password" maxlength="30">
+          <small *ngIf="this.signupForm.get('password')?.touched && this.signupForm.get('password')?.invalid">This field is required</small>
+        </div>
+        
+        <div class="form-field-div">
+          <label for="role">Role</label>
+          <select formControlName="role" id="role">
+            <option value="ROLE_USER">User</option>
+            <option value="ROLE_ADMIN">Admin</option>
+          </select>
+        </div>
+  
+    </form>
     <div class="d-flex flex-column align-items-center">
       <button (click)="onSubmit()">Sign in</button>
       <p>Already have an account ? <a routerLink="/login">Log in</a></p>
     </div>
-  
-  </form>
-</div>
+  </div>
+
+</div>  
+
 

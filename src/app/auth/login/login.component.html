@@ -1,24 +1,29 @@
+<div class="main-div">
+  <div class="img-div">
+    <img src="../../../assets/signup/signup-photo.svg" alt="signup">
+  </div>
 
-<div class="custom-container">
-
-  <form [formGroup]="loginForm" class="form-container">
-    <h2>Log in to EMS</h2>
-    <div class="form-field-div">
-      <label for="email">Email</label>
-      <input type="text" id="email" formControlName="email">
-    </div>
+  <div class="custom-container">
   
-    <div class="form-field-div">
-      <label for="password">Password</label>
-      <input type="password" id="password" formControlName="password">
-    </div>
+    <h2>Log in to EMS</h2>
+    <form [formGroup]="loginForm" class="form-container">
+      <div class="form-field-div">
+        <label for="email">Email</label>
+        <input type="text" id="email" formControlName="email">
+      </div>
     
+      <div class="form-field-div">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password">
+      </div>
 
+    </form>
+    
     <div class="d-flex flex-column align-items-center">
       <button [disabled]="loginForm.invalid" (click)="onSubmit()">Log in</button>
       <p>Don't have an account ? <a routerLink="/signup" >Sign in</a></p>
     </div>
-  
-  </form>
+  </div>
 </div>
+
 

@@ -4,10 +4,12 @@ import { Observable } from 'rxjs';
 import { AdminDashboardDto } from '../models/admin-dashboard-dto.model';
 import { CompanyWithUsersDto } from '../models/CompanyWithUsersDto';
 import { UserDto } from '../models/userDto';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {
-  private baseUrl = 'http://localhost:9090/api/companies';
+  private apiUrl = environment.apiUrl;
+  private baseUrl = `${this.apiUrl}/companies`;
 
   constructor(private http: HttpClient) {}
 

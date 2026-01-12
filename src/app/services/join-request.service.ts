@@ -2,12 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CompanyJoinRequest } from '../models/company-join-request.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class JoinRequestService {
-    private baseUrl = 'http://localhost:9090/api/join-requests';
+    private apiUrl = environment.apiUrl;
+    private baseUrl = `${this.apiUrl}/join-requests`;
 
     constructor(private http: HttpClient) {}
 

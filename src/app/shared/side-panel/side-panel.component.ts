@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { PanelService } from 'src/app/services/panel.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { CompanyWithUsersDto } from 'src/app/models/CompanyWithUsersDto';
+import { CompanyWithUsersDto } from 'src/app/models/companyWithUsersDto';
 import { AdminService } from 'src/app/services/admin.service';
 import { UserContextService } from 'src/app/services/user-context.service';
 import { Subject, take, takeUntil } from 'rxjs';

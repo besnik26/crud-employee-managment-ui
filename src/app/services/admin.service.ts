@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AdminDashboardDto } from '../models/admin-dashboard-dto.model';
-import { CompanyWithUsersDto } from '../models/CompanyWithUsersDto';
+import { CompanyWithUsersDto } from '../models/companyWithUsersDto';
 import { UserDto } from '../models/userDto';
 import { environment } from 'src/environments/environment';
 

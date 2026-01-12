@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { AdminService } from 'src/app/services/admin.service';
 import { AdminDashboardDto } from 'src/app/models/admin-dashboard-dto.model';
-import { CompanyWithUsersDto } from 'src/app/models/CompanyWithUsersDto';
+import { CompanyWithUsersDto } from 'src/app/models/companyWithUsersDto';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 @Component({

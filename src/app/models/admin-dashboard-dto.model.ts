@@ -1,7 +1,9 @@
 import { CompanySummaryDto } from "./companySummaryDto";
 
 export interface AdminDashboardDto {
-  adminUsername: string;
+  firstName:string;
+  lastName:string;
+  adminEmail: string;
   totalCompanies: number;
   companies: CompanySummaryDto[];
 }

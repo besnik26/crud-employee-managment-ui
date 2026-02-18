@@ -21,9 +21,9 @@ export class SignupComponent {
     private toaster:ToastrService
   ) {
     this.signupForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email:['', [Validators.required, Validators.email]],
+      firstName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZÀ-ž\s'-]+$/)]],
+      lastName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZÀ-ž\s'-]+$/)]],
+      email:['', [Validators.required, Validators.email,Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)]],
       phoneNumber:['', [Validators.required, Validators.pattern('^\\+?[0-9]{10,15}$')]],
       password: ['', Validators.required],
       role: ['ROLE_USER', Validators.required]
@@ -40,8 +40,15 @@ export class SignupComponent {
           })
         },
         error: (err) => {
-          console.error(err);
-          this.toaster.error('Signup failed. Please try again.');
+          let message = 'Signup failed. Please try again.';
+
+          if (err.status === 409) {
+            message = err.error?.message || 'Account already exists';
+          } else if (err.status === 400) {
+            message = 'Invalid signup data';
+          }
+
+          this.toaster.error(message, 'Signup Error', { timeOut: 5000 });
         }
       });
     }else{

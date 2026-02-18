@@ -1,12 +1,10 @@
 <p class="m-0">
   <mat-toolbar color="primary" class="navbar">
     <div *ngIf="authService.isLoggedIn()" (click)="toggleSidePanel()" class="icon-div">
-
       <mat-icon *ngIf="!sidePanelOpen" aria-hidden="false" aria-label="Example menus icon" fontIcon="menu"></mat-icon>
       <mat-icon *ngIf="sidePanelOpen" aria-hidden="false" aria-label="Example close icon" fontIcon="close"></mat-icon>
-
-
     </div>
+
     <span class="monoton-regular">CMS</span>
     <div style="width: auto;" class="d-flex align-items-center" *ngIf="authService.isLoggedIn()">
       <div style="position: relative;">
@@ -23,23 +21,23 @@
               <ul>
                 <li *ngFor="let notification of notifications">
                   <!-- NEWS -->
-                  <div *ngIf="notification.type === 'NEWS'" class="d-flex justify-content-between">
+                  <div *ngIf="notification.type === 'NEWS'" class="notification">
                     <p>{{ notification.message }}</p>
                     <button (click)="markAsRead(notification.id)">Mark as Read</button>
                   </div>
 
                   <!-- REQUEST (admin sees response) -->
-                  <div *ngIf="notification.type === 'REQUEST'">
+                  <div *ngIf="notification.type === 'REQUEST'" class="notification">
                     <p>{{ notification.message }}</p>
                     <button (click)="markAsRead(notification.id)">Mark as Read</button>
                   </div>
 
                   <!-- JOIN_REQUEST (user gets invite) -->
-                  <div *ngIf="notification.type === 'JOIN_REQUEST'" class="d-flex justify-content-between">
-                    <p>{{ notification.message }}</p>
-                    <div>
-                      <button (click)="respond(notification.relatedId, true)">Accept</button>
-                      <button (click)="respond(notification.relatedId, false)">Reject</button>
+                  <div *ngIf="notification.type === 'JOIN_REQUEST'" class="notification join-noti">
+                    <p>{{ notification.message + ' by ' + notification.senderEmail}}</p>
+                    <div class="join-button-div">
+                      <button class="accept" (click)="respond(notification.relatedId, true)">Accept</button>
+                      <button class="reject" (click)="respond(notification.relatedId, false)">Reject</button>
                     </div>
                   </div>
                 </li>

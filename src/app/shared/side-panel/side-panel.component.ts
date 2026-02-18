@@ -7,7 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { CompanyWithUsersDto } from 'src/app/models/companyWithUsersDto';
 import { AdminService } from 'src/app/services/admin.service';
 import { UserContextService } from 'src/app/services/user-context.service';
-import { Subject, take, takeUntil } from 'rxjs';
+import { Subject, switchMap, take, takeUntil } from 'rxjs';
+
 @Component({
   selector: 'app-side-panel',
   templateUrl: './side-panel.component.html',
@@ -43,7 +44,12 @@ export class SidePanelComponent implements OnInit, OnDestroy{
       this.role = role || '';
     })
     if(this.role ==='admin'){
-      this.adminService.getMyCompanies().pipe(takeUntil(this.destroy$)).subscribe(data => this.companies = data);
+      this.adminService.companyRefreshTrigger$
+        .pipe(
+          takeUntil(this.destroy$),
+          switchMap(()=>this.adminService.getMyCompanies())
+        ).subscribe(data => this.companies = data)
+        
     } else if(this.role === 'user'){
       this.dashboardService.user$.pipe(takeUntil(this.destroy$)).subscribe(user => {
         this.user = user;

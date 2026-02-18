@@ -10,7 +10,6 @@
 
 .dashboard-div{
   display: flex;
-  // justify-content: space-between;
   column-gap: 50px;
 }
 
@@ -21,7 +20,7 @@
   display: flex;
   flex-direction: column;
   row-gap: 20px;
-  h2{
+  h3, h2{
     margin: 0;
   }
 
@@ -29,6 +28,7 @@
       width: 100%;
       height: 140px;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       border-radius: 20px;
@@ -90,28 +90,33 @@
 .company-container{
   display: flex;
   justify-content: space-between;
-  // width: 70%;
-  // flex-wrap: wrap;
-  gap: 30px;
+  gap: 20px;
   .company-card{
     position: relative;
     // min-height: 350px;
     width: 100%;
-    max-height: 360px;
+    max-height: 400px;
     padding: 25px;
-    min-width: 300px;
+    min-width: 320px;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
     border-radius: 30px;
     background-color: rgba(163, 234, 255, 0.1);
     p{
       margin:  0 0 0 5px;
+      font-size: 13px;
+      color: #979797;
+      font-weight: bold;
+    }
+    mat-icon{
+      overflow: visible;
     }
     h1{
-      font-size: 30px;
+      font-size: 23px;
       font-weight: bold;
       color: #1070d6;
-      max-width: 220px;
+      max-width: 238px;
+      word-break: break-word;
     }
     h2{
       font-weight: bold;
@@ -127,6 +132,7 @@
     .btn-absolute-div{
       position: absolute;
       display: flex;
+      flex-direction: column;
       gap: 5px;
       top: 25px;
       right: 25px;
@@ -176,7 +182,7 @@
   position: absolute;
   bottom: 25px;
   right: 25px;
-  opacity: 60%;
+  opacity: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -233,7 +239,7 @@
         column-gap: 10px;
       }
       .info-div{
-        height: 90px;
+        height: 105px;
       }
       
       .add-company{
@@ -247,19 +253,32 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .info-div{
-    padding: 5px;
-    h2{ 
-      font-size: 16px!important;
+  .info-section{
+    row-gap: 10px;
+    .info-div{
+      padding: 5px;
+      h2{ 
+        font-size: 16px!important;
+      }
+    }
+    .total-companies, .total-employees{
+      h2{font-size: 14px!important;}
     }
   }
   .company-container{
     width: 100%!important;
     .company-card{
       max-width: none;
+      min-width: 280px;
     }
   }
   .title{
     text-align: start!important;
   }
+}
+
+@media only screen and (max-width: 450px) {
+  .company-card{
+      min-height: 400px;
+    }
 }

@@ -19,9 +19,9 @@ export class AddCompanyComponent {
     private toaster:ToastrService
   ) {
     this.companyForm = this.fb.group({
-      name: ['', Validators.required],
-      industry: ['', Validators.required],
-      location: ['', Validators.required]
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40) ]],
+      industry: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40) ]],
+      location: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40) ]]
     });
   }
 
@@ -38,5 +38,14 @@ export class AddCompanyComponent {
         }
       });
     }
+    else{
+      this.markFormGroupTouched(this.companyForm)
+    }
+  }
+
+  markFormGroupTouched(formGroup:FormGroup){
+    Object.values(formGroup.controls).forEach(control =>{
+      control.markAsTouched();
+    })
   }
 }

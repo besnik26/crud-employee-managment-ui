@@ -8,10 +8,12 @@
     <div class="info-cover">
 
       <div class="info-div total-companies" *ngIf="dashboardData">
-        <h2>Total Companies: {{ dashboardData.totalCompanies }}</h2>
+        <h2>Name: {{dashboardData.firstName + ' ' + dashboardData.lastName}}</h2>
+        <h2>Email: {{dashboardData.adminEmail}}</h2>
       </div>
-  
-      <div class="info-div total-employees">
+      
+      <div class="info-div total-employees" *ngIf="dashboardData">
+        <h2>Total Companies: {{ dashboardData.totalCompanies }}</h2>
         <h2>Total Employees: {{ totalEmployees }}</h2>
       </div>
     </div>

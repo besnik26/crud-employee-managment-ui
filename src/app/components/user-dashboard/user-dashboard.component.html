@@ -1,5 +1,5 @@
 
-
+<!-- <h1 class="fw-bolder main-title">User Dashboard</h1> -->
 
 <div class="dashboard-cover" *ngIf="user">
 
@@ -11,12 +11,14 @@
         <p>{{user.firstName + ' ' + user.lastName}}</p>
       </div>
       <p><strong>ID</strong>: {{user.id}}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
       <p><strong>Role:</strong> {{ user.role }}</p>
     </div>
+
   
   
-    <div class="box-style company-details">
-      <div *ngIf="user.company">
+    <div class="box-style company-details" *ngIf="user.company">
+      <div>
         <h2>Company Details</h2>
         <p><strong>Name:</strong> {{ user.company.name }}</p>
         <p><strong>Industry:</strong> {{ user.company.industry }}</p>
@@ -36,10 +38,13 @@
         <small>By {{ news.createdByEmail }} on {{ news.createdAt | date:'short' }}</small>
       </div>
     </div>
+    <div *ngIf="newsList.length===0" class="img-div">
+      <p class="text-center" *ngIf="user.company === null">You need to be part of a company to see their posts!</p>
+      <p class="text-center"*ngIf="user.company !== null && newsList.length === 0">The admin of the company still hasn't made a post!</p>
+      <img src="../../../assets/news/no_news.svg" alt="news">
+    </div>
   </div>
 
-  <!-- <div class="img-div">
-      <img src="../../../assets/visual-data.svg" alt="visual-data">
-  </div> -->
+ 
   
 </div>

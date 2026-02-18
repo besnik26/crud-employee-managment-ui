@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { AdminDashboardDto } from '../models/admin-dashboard-dto.model';
 import { CompanyWithUsersDto } from '../models/companyWithUsersDto';
 import { UserDto } from '../models/userDto';
 import { environment } from 'src/environments/environment';
+
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {
@@ -18,6 +19,13 @@ export class AdminService {
     return new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
+  }
+
+  private companyRefresh$ = new BehaviorSubject<void>(undefined);
+  companyRefreshTrigger$ = this.companyRefresh$.asObservable();
+
+  triggerCompanyRefresh() {
+    this.companyRefresh$.next();
   }
 
   getDashboard(): Observable<AdminDashboardDto> {
@@ -42,7 +50,9 @@ export class AdminService {
   addCompany(data: { name: string; industry: string; location: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}`, data, {
       headers: this.getAuthHeaders()
-    });
+    }).pipe(
+      tap(()=> this.triggerCompanyRefresh())
+    )
   }
 
   updateCompany(companyId: number, companyData: any): Observable<any> {
@@ -60,7 +70,10 @@ export class AdminService {
   }
 
   deleteCompany(companyId: number): Observable<string> {
-    return this.http.delete(`${this.baseUrl}/${companyId}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/${companyId}`, { responseType: 'text' })
+      .pipe(
+        tap(() => this.triggerCompanyRefresh())
+      );
   }
   
   removeUserFromCompany(companyId: number, userId: number) {

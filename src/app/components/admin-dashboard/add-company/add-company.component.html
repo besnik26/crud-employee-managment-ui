@@ -9,14 +9,26 @@
     <div class="input-div">
       <label>Company Name</label>
       <input formControlName="name" type="text" />
+      <small 
+      *ngIf="this.companyForm.get('name')?.touched && this.companyForm.get('name')?.invalid"
+      >This field is invalid</small>
+
     </div>
     <div class="input-div">
       <label>Industry</label>
       <input formControlName="industry" type="text" />
+      <small 
+      *ngIf="this.companyForm.get('industry')?.touched && this.companyForm.get('industry')?.invalid"
+      >This field is invalid</small>
+
     </div>
     <div class="input-div">   
       <label>Location</label>
       <input formControlName="location" type="text" />
+      <small 
+      *ngIf="this.companyForm.get('location')?.touched && this.companyForm.get('location')?.invalid"
+      >This field is invalid</small>
+
     </div>
   
     <button type="submit">Submit</button>

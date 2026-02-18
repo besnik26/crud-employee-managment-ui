@@ -24,9 +24,9 @@ export class EditCompanyComponent implements OnInit{
   ngOnInit(): void {
     this.companyId = +this.route.snapshot.paramMap.get('id')!;
     this.form = this.fb.group({
-      name: ['', Validators.required],
-      industry: ['', Validators.required],
-      location: ['', Validators.required]
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40) ]],
+      industry: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40) ]],
+      location: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40) ]]
     });
 
     this.adminService.getCompanyById(this.companyId).subscribe(company => {
@@ -35,12 +35,21 @@ export class EditCompanyComponent implements OnInit{
   }
 
   onSubmit(): void {
-    if (this.form.invalid) return;
+    if (this.form.valid){
+      this.adminService.updateCompany(this.companyId, this.form.value).subscribe(() => {
+        this.router.navigate(['/admin-dashboard']);
+        this.toaster.success('Company info edited successfully!')
+      });
+    }else{
+      this.markFormGroupTouched(this.form);
+    }
 
-    this.adminService.updateCompany(this.companyId, this.form.value).subscribe(() => {
-      this.router.navigate(['/admin-dashboard']);
-      this.toaster.success('Company info edited successfully!')
-    });
 
+  }
+
+  markFormGroupTouched(formGroup:FormGroup){
+    Object.values(formGroup.controls).forEach(control =>{
+      control.markAsTouched();
+    })
   }
 }

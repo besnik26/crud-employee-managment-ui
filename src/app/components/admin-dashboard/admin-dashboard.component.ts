@@ -5,6 +5,7 @@ import { AdminDashboardDto } from 'src/app/models/admin-dashboard-dto.model';
 import { CompanyWithUsersDto } from 'src/app/models/companyWithUsersDto';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { switchMap } from 'rxjs';
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -23,10 +24,20 @@ export class AdminDashboardComponent implements OnInit{
 
   ngOnInit(): void {
     this.adminService.getDashboard().subscribe(data => this.dashboardData = data);
-    this.adminService.getMyCompanies().subscribe(data => {
-      this.companies = data
-      this.calculateTotalEmployees(data);
-    });
+    // this.adminService.getMyCompanies().subscribe(data => {
+    //   this.companies = data
+    //   this.calculateTotalEmployees(data);
+    // });
+
+     this.adminService.companyRefreshTrigger$
+      .pipe(
+        switchMap(() => this.adminService.getMyCompanies())
+      )
+      .subscribe(data => {
+        this.companies = data;
+        this.calculateTotalEmployees(data);
+      });
+
   }
 
 
@@ -40,9 +51,7 @@ export class AdminDashboardComponent implements OnInit{
     if (confirm('Are you sure you want to delete this company?')) {
       this.adminService.deleteCompany(companyId).subscribe({
         next: () => {
-          this.ngOnInit();
           this.toaster.success('Company deleted successfully!')
-
         },
         error: (err) => {
           console.error(err);

@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { UserContextService } from 'src/app/services/user-context.service';
 import { ToastrService } from 'ngx-toastr';
+import { timeout } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   loginForm: FormGroup;
   errorMessage = '';
 
@@ -25,6 +26,12 @@ export class LoginComponent {
       password: ['', Validators.required]
     });
   }
+  ngOnInit(): void {
+    this.toaster.warning('Sorry if there is a delay with the requests. That is because the backend service is a free instance service!','Delay warning',{
+      timeOut:6000
+    })
+  }
+  
 
   onSubmit(): void {
     if (this.loginForm.valid) {

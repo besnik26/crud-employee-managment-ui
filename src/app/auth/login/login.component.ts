@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { UserContextService } from 'src/app/services/user-context.service';
 import { ToastrService } from 'ngx-toastr';
-import { timeout } from 'rxjs';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,6 +12,7 @@ import { timeout } from 'rxjs';
 })
 export class LoginComponent implements OnInit{
   loginForm: FormGroup;
+  isLoading = false;
   errorMessage = '';
 
   constructor(
@@ -35,8 +36,10 @@ export class LoginComponent implements OnInit{
 
   onSubmit(): void {
     if (this.loginForm.valid) {
+      this.isLoading = true;
       this.authService.login(this.loginForm.value).subscribe({
         next: (response) => {
+          this.isLoading = false;
           localStorage.setItem('token', response.token);
           const decodedToken = this.decodeToken(response.token);
           this.userContext.setRoleFromToken();
@@ -50,6 +53,7 @@ export class LoginComponent implements OnInit{
           }
         },
         error: () => {
+          this.isLoading = false;
           this.errorMessage = 'Invalid username or password';
           this.toaster.error('Invalid username or password');
         }

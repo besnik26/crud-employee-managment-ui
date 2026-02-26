@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./add-company.component.scss']
 })
 export class AddCompanyComponent {
+  isLoading = false;
   companyForm: FormGroup;
 
   constructor(
@@ -27,13 +28,16 @@ export class AddCompanyComponent {
 
   onSubmit() {
     if (this.companyForm.valid) {
+      this.isLoading = true;
       this.adminService.addCompany(this.companyForm.value).subscribe({
         next: () => {
+          this.isLoading = false;
           this.router.navigate(['/admin-dashboard'])
           this.toaster.success('Company added successfully!')
         },
 
         error: err => {
+          this.isLoading = false;
           this.toaster.error('Failed to add company!')
         }
       });

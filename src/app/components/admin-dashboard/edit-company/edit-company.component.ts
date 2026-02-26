@@ -10,6 +10,7 @@ import { AdminService } from 'src/app/services/admin.service';
   styleUrls: ['./edit-company.component.scss']
 })
 export class EditCompanyComponent implements OnInit{
+  isLoading = false;
   form!: FormGroup;
   companyId!: number;
 
@@ -36,11 +37,14 @@ export class EditCompanyComponent implements OnInit{
 
   onSubmit(): void {
     if (this.form.valid){
+      this.isLoading = true;
       this.adminService.updateCompany(this.companyId, this.form.value).subscribe(() => {
+        this.isLoading = false;
         this.router.navigate(['/admin-dashboard']);
         this.toaster.success('Company info edited successfully!')
       });
     }else{
+      this.isLoading = false;
       this.markFormGroupTouched(this.form);
     }
 

@@ -38,7 +38,9 @@
 
 }
 
-
+.progress-container{
+  margin: 40px 10px 0px 10px;
+}
 
 .dashboard-btn{
     height: 35px;
@@ -54,4 +56,13 @@
     mat-icon{
         font-size: 24px;
     }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .progress-container{
+        display: flex;
+        justify-content: center;
+    }
+
 }

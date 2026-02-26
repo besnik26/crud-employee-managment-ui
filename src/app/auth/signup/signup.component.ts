@@ -11,8 +11,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent {
-  
   signupForm: FormGroup;
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder, 
@@ -32,14 +32,17 @@ export class SignupComponent {
 
   onSubmit() {
     if (this.signupForm.valid) {
+      this.isLoading = true
       this.authService.signup(this.signupForm.value).subscribe({
         next: (res) => {
+          this.isLoading = false
           this.router.navigate(['/login']);
           this.toaster.success('Please log in with your new account!',res.message,{
             timeOut:5000
           })
         },
         error: (err) => {
+          this.isLoading = false;
           let message = 'Signup failed. Please try again.';
 
           if (err.status === 409) {

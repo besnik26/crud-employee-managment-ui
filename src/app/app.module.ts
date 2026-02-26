@@ -26,7 +26,6 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
 import { AddCompanyComponent } from './components/admin-dashboard/add-company/add-company.component';
 import { EditCompanyComponent } from './components/admin-dashboard/edit-company/edit-company.component';
 import { AuthInterceptor } from './auth.interceptor';
-import { CompanyDetailsComponent } from './components/admin-dashboard/company-details/company-details.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SidePanelComponent } from './shared/side-panel/side-panel.component';
@@ -37,6 +36,7 @@ import {MatCardModule} from '@angular/material/card';
 import { MatSortModule } from '@angular/material/sort';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { NewsModalComponent } from './components/admin-dashboard/news-modal/news-modal.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,6 @@ import { NewsModalComponent } from './components/admin-dashboard/news-modal/news
     UserDashboardComponent,
     AddCompanyComponent,
     EditCompanyComponent,
-    CompanyDetailsComponent,
     SidePanelComponent,
     NewsComponent,
     EmployeesComponent,
@@ -77,6 +76,7 @@ import { NewsModalComponent } from './components/admin-dashboard/news-modal/news
     MatCardModule,
     MatSortModule,
     MatTableModule,
+    MatProgressSpinnerModule,
     FormsModule,
     ToastrModule.forRoot({
         preventDuplicates: true,

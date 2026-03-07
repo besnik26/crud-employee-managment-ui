@@ -4,29 +4,6 @@
     width: 100%;
     padding: 0 32px;
     height: 64px;
-    // button{
-    //     padding: 0 2px;
-    //     display: flex;
-    //     justify-content: center;
-    //     align-items: center;
-    //     background-color: white;
-    //     border: 1px solid rgb(47, 124, 226);
-    //     height: 25px;
-    //     border-radius: 4px;
-    //     mat-icon{
-    //       color: rgb(47, 124, 226);
-    //       font-size: 20px;
-    //       height: auto;
-    //     }
-    //     &:hover{
-    //       background-color: #3f51b5;
-    //       border: 1px solid white;
-    //       mat-icon{
-    //         color: white;
-    //       }
-    //       color: white;
-    //     }
-    // }
 }
 .icon-div{
   padding: 6px;
@@ -142,6 +119,7 @@
     list-style: none;
     max-height: 380px;
     overflow-y: scroll;
+    scrollbar-width: thin;
     padding-right: 15px;
     li{
       font-size:12px;

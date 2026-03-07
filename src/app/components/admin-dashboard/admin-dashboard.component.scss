@@ -19,6 +19,7 @@
   height: auto;
   display: flex;
   flex-direction: column;
+  min-width: 300px;
   row-gap: 20px;
   h3, h2{
     margin: 0;
@@ -107,6 +108,8 @@
       font-size: 13px;
       color: #979797;
       font-weight: bold;
+      word-break: break-word;
+
     }
     mat-icon{
       overflow: visible;

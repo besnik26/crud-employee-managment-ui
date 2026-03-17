@@ -34,7 +34,7 @@
                 display: block;
                 position: absolute;
                 width: 250px;
-                height: 136px;
+                height: 163px;
                 border-radius: 0px 10px 10px 0px;
                 top: 0px;
                 right: -251px;
@@ -43,7 +43,7 @@
                 color: white;
                 padding: 15px 15px 15px 35px;
                 .company{
-                    height: 35px;
+                    min-height: 35px;
                     display: flex;
                     align-items: center;
                     &:hover{
@@ -57,7 +57,11 @@
                     list-style: none;
                     padding-left: 0px;
                     margin-bottom: 0px;
-                    li{padding: 0 5px;}
+                    li{
+                        padding: 0 5px;
+                        word-break: break-word;
+
+                    }
                 }
                 p{
                     color: white!important;
@@ -75,8 +79,10 @@
                 display: flex;
                 align-items: center;
                 cursor: pointer;
-                height: 35px;
+                min-height: 35px;
                 padding: 0 5px;
+                max-width: 275px;
+                word-break: break-word;
                 &:last-child{
                     margin-bottom: 0px;
                 }
